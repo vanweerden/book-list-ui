@@ -15,19 +15,25 @@ export class BookListContainer extends React.Component {
   componentDidMount() {
     const url = 'http://localhost:5000/books';
     fetch(url)
-      .then( res => res.json() )
+      .then( res => {
+        console.log(res);
+        return res.json();
+      })
       .then( data => {
-        let updatedBooks = this.state.books.concat(data);
-        this.setState({
-          books: updatedBooks
-        });
+        console.log(data);
+        this.setState({ books: data });
       }
     )
     .catch(err => console.log("ERROR:", err.message));
   }
 
   render() {
-    // return <BookList />;
-    return this.state.books;
+    console.log(this.state.books);
+    console.log(Array.isArray(this.state.books));
+    // console.log(this.state.books.length);
+    return (
+      // <div></div>
+      <BookList books={this.state.books} />
+    );
   }
 }
