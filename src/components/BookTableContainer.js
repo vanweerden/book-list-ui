@@ -2,9 +2,9 @@
 // Stateful container for BookList component
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BookList } from './BookList';
+import { BookTable } from './BookTable';
 
-export class BookListContainer extends React.Component {
+export class BookTableContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,7 +33,7 @@ export class BookListContainer extends React.Component {
     // console.log(this.state.books.length);
     return (
       // <div></div>
-      <BookList books={this.state.books} />
+      <BookTable books={this.state.books} />
     );
   }
 }
