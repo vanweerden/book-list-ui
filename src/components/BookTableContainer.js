@@ -9,7 +9,7 @@ export class BookTableContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: [],
+      books: null,
     };
   }
 
@@ -20,18 +20,21 @@ export class BookTableContainer extends React.Component {
         console.log(res);
         return res.json();
       })
-      .then( data => {
-        console.log(data);
-        this.setState({ books: data });
+      .then( books => {
+        console.log(books);
+        this.setState({ books });
       }
     )
     .catch(err => console.log("ERROR:", err.message));
   }
 
   render() {
-    console.log(this.state.books);
-    return (
-      <BookTable books={this.state.books} />
-    );
+    if (this.state.books == null) {
+      return <div>Loading...</div>
+    } else {
+      return (
+        <BookTable books={this.state.books} />
+      );
+    }
   }
 }
