@@ -12,7 +12,7 @@ export const BookItem = (props) => {
   const blurb = props.book.blurb;
 
   return (
-    <tr id='book-item'>
+    <tr className='book-item'>
       <td>{title}</td>
       <td>{authorFirst} {authorLast}</td>
       <td>{finished}</td>

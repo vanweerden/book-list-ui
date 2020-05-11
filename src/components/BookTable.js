@@ -16,7 +16,7 @@ export const BookTable = (props) => {
   const listItems = books.map( (item) => <BookItem book={item} key={item.id}/>);
 
   return (
-  <table>
+  <table className='book-table'>
     <thead>
       <tr>
         <th>Title</th>
