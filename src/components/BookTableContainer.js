@@ -1,7 +1,8 @@
-// Fetches book list from API and stores them in state
 // Stateful container for BookList component
+// Fetches book list from API and stores them in state
+
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import { BookTable } from './BookTable';
 
 export class BookTableContainer extends React.Component {
@@ -29,10 +30,7 @@ export class BookTableContainer extends React.Component {
 
   render() {
     console.log(this.state.books);
-    console.log(Array.isArray(this.state.books));
-    // console.log(this.state.books.length);
     return (
-      // <div></div>
       <BookTable books={this.state.books} />
     );
   }
