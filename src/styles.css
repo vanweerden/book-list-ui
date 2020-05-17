@@ -1,4 +1,37 @@
+/* ----- Universal reset ----- */
 * {
   margin: 0px;
   padding: 0px;
+}
+
+/* ----- Variables ----- */
+
+/* ----- Positioning ----- */
+#root{
+  margin: 0 auto;
+}
+
+/* ----- Book Table ----- */
+.table {
+  display: flex;
+  flex-direction: column;
+}
+.table-header {
+  font-weight: bold;
+  display: flex;
+
+}
+.table-row {
+  display: flex;
+  width: 100%;
+}
+.table-cell {
+
+}
+
+
+/* ----- Page styling ----- */
+body {
+  box-sizing: border-box;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

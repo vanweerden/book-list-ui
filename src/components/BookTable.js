@@ -16,21 +16,17 @@ export const BookTable = (props) => {
   const listItems = books.map( (item) => <BookItem book={item} key={item.id}/>);
 
   return (
-  <table className='book-table'>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Date Finished</th>
-        <th>Pages</th>
-        <th>Language</th>
-        <th>Blurb</th>
-      </tr>
-    </thead>
-    <tbody>
-      {listItems}
-    </tbody>
-  </table>
+  <div className='table'>
+    <div className='table-row table-header'>
+      <div className='table-cell'>Title</div>
+      <div className='table-cell'>Author</div>
+      <div className='table-cell'>Date Finished</div>
+      <div className='table-cell'>Pages</div>
+      <div className='table-cell'>Language</div>
+      <div className='table-cell'>Blurb</div>
+    </div>
+    {listItems}
+  </div>
   );
 
 }
