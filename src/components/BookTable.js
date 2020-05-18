@@ -18,12 +18,12 @@ export const BookTable = (props) => {
   return (
   <div className='table'>
     <div className='table-row table-header'>
-      <div className='table-cell'>Title</div>
-      <div className='table-cell'>Author</div>
-      <div className='table-cell'>Date Finished</div>
-      <div className='table-cell'>Pages</div>
-      <div className='table-cell'>Language</div>
-      <div className='table-cell'>Blurb</div>
+      <div className='table-cell title-header'>Title</div>
+      <div className='table-cell author-header'>Author</div>
+      <div className='table-cell date-header'>Date Finished</div>
+      <div className='table-cell pages-header'>Pages</div>
+      <div className='table-cell language-header'>Language</div>
+      <div className='table-cell blurb-header'>Blurb</div>
     </div>
     {listItems}
   </div>

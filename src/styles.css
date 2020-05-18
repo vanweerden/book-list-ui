@@ -15,7 +15,6 @@ body {
 
 /* ----- Header and Navigation ----- */
 header {
-  text-align: center;
   padding: 1em 0.3em;
   margin: 0.3em 0.3em 1em 0.3em;
   border-bottom: 1px solid #BBB;;
@@ -34,6 +33,7 @@ header {
 .table {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
 }
 
 .table-header {
@@ -57,7 +57,7 @@ header {
   margin-bottom: 0.3em;
 }
 
-.pages, .language, .blurb {
+.pages, .language, .blurb, .blurb-header {
   display: none;
 }
 
@@ -69,8 +69,35 @@ header {
   color: #666;
 }
 
-.date-finished {
+.date {
   font-size: 0.8em;
 }
 
 /* ----- Media queries ----- */
+@media screen and (min-width: 600px) {
+  .table-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .table-header {
+    font-weight: bold;
+  }
+
+  .book-item > * {
+    font-weight: normal;
+  }
+
+  .pages, .language {
+    display: block;
+  }
+
+  .table-cell {
+    margin: 1px;
+    padding: 1px;
+    font-size: 1em;
+    color: black;
+    flex: 1 1 0px;
+  }
+}
