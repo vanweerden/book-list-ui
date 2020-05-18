@@ -1,14 +1,33 @@
-/* ----- Universal reset ----- */
+/* ----- Variables ----- */
+
+
+/* ----- Page Layout ----- */
 * {
   margin: 0px;
   padding: 0px;
 }
 
-/* ----- Variables ----- */
+/* ----- General Styles ----- */
+body {
+  box-sizing: border-box;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 
-/* ----- Positioning ----- */
-#root{
-  margin: 0 auto;
+/* ----- Header and Navigation ----- */
+header {
+  text-align: center;
+  padding: 1em 0.3em;
+  margin: 0.3em 0.3em 1em 0.3em;
+  border-bottom: 1px solid #BBB;;
+}
+
+#header {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+#subtitle {
+  font-style: italic;
 }
 
 /* ----- Book Table ----- */
@@ -16,22 +35,42 @@
   display: flex;
   flex-direction: column;
 }
+
 .table-header {
-  font-weight: bold;
-  display: flex;
+  display: none;
+}
+
+.table-item {
 
 }
-.table-row {
+
+/* ----- Book Item ----- */
+.book-item {
+  border-bottom: 1px solid #BBB;
   display: flex;
-  width: 100%;
+  flex-direction: column;
+  margin: 0.3em;
+  padding: 0.3em 0.3em 0.9em 0.3em;
 }
+
 .table-cell {
-
+  margin-bottom: 0.3em;
 }
 
-
-/* ----- Page styling ----- */
-body {
-  box-sizing: border-box;
-  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+.pages, .language, .blurb {
+  display: none;
 }
+
+.title {
+  font-weight: bold;
+}
+
+.author {
+  color: #666;
+}
+
+.date-finished {
+  font-size: 0.8em;
+}
+
+/* ----- Media queries ----- */

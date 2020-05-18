@@ -12,13 +12,13 @@ export const BookItem = (props) => {
   const blurb = props.book.blurb;
 
   return (
-    <div className='table-row'>
-      <div className='table-cell'>{title}</div>
-      <div className='table-cell'>{authorFirst} {authorLast}</div>
-      <div className='table-cell'>{finished}</div>
-      <div className='table-cell'>{pages}</div>
-      <div className='table-cell'>{language}</div>
-      <div className='table-cell'>{blurb}</div>
+    <div className='table-row book-item'>
+      <div className='table-cell title'>{title}</div>
+      <div className='table-cell author'>— {authorFirst} {authorLast}</div>
+      <div className='table-cell date-finished'>Finished on {finished}</div>
+      <div className='table-cell pages'>{pages}</div>
+      <div className='table-cell language'>{language}</div>
+      <div className='table-cell blurb'>{blurb}</div>
     </div>
   );
 }
