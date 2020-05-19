@@ -20,7 +20,7 @@ export const BookTable = (props) => {
     <div className='table-row table-header'>
       <div className='table-cell title-header'>Title</div>
       <div className='table-cell author-header'>Author</div>
-      <div className='table-cell date-header'>Date Finished</div>
+      <div className='table-cell date-header'>Finished</div>
       <div className='table-cell pages-header'>Pages</div>
       <div className='table-cell language-header'>Language</div>
       <div className='table-cell blurb-header'>Blurb</div>

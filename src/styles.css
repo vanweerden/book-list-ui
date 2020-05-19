@@ -1,23 +1,28 @@
-/* ----- Variables ----- */
+/* || Variables */
 
 
-/* ----- Page Layout ----- */
+/* || Page Layout */
 * {
   margin: 0px;
   padding: 0px;
 }
 
-/* ----- General Styles ----- */
+#app {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* || General Styles */
 body {
   box-sizing: border-box;
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-/* ----- Header and Navigation ----- */
+/* || Header and Navigation */
 header {
   padding: 1em 0.3em;
-  margin: 0.3em 0.3em 1em 0.3em;
-  border-bottom: 1px solid #BBB;;
+  margin: 0.3em;
+  border-bottom: 1px solid #BBB;
 }
 
 #header {
@@ -29,28 +34,28 @@ header {
   font-style: italic;
 }
 
-/* ----- Book Table ----- */
+/* || Book Table */
 .table {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
 }
 
-.table-header {
-  display: none;
-}
-
 .table-item {
 
 }
 
-/* ----- Book Item ----- */
-.book-item {
+/* || Book Item */
+.table-row {
   border-bottom: 1px solid #BBB;
   display: flex;
   flex-direction: column;
   margin: 0.3em;
   padding: 0.3em 0.3em 0.9em 0.3em;
+}
+
+.table-header {
+  display: none;
 }
 
 .table-cell {
@@ -73,12 +78,17 @@ header {
   font-size: 0.8em;
 }
 
-/* ----- Media queries ----- */
+/* || Media queries */
 @media screen and (min-width: 600px) {
   .table-row {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center;
+  }
+
+  .book-item {
+    height: 3em;
   }
 
   .table-header {
@@ -95,9 +105,18 @@ header {
 
   .table-cell {
     margin: 1px;
-    padding: 1px;
+    padding: 1px 1em;
     font-size: 1em;
     color: black;
-    flex: 1 1 0px;
+    flex: 1;
   }
+
+  .title, .title-header {
+    flex-grow: 4;
+  }
+
+  .author, .author-header {
+    flex-grow: 1.5;
+  }
+
 }

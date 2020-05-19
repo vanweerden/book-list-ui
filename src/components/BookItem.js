@@ -15,7 +15,7 @@ export const BookItem = (props) => {
     <div className='table-row book-item'>
       <div className='table-cell title'>{title}</div>
       <div className='table-cell author'>{authorFirst} {authorLast}</div>
-      <div className='table-cell date'>Finished on {finished}</div>
+      <div className='table-cell date'>{finished}</div>
       <div className='table-cell pages'>{pages}</div>
       <div className='table-cell language'>{language}</div>
       <div className='table-cell blurb'>{blurb}</div>
