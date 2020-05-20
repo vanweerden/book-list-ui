@@ -1,10 +1,10 @@
 import React from 'react';
 import { Header } from './Header';
-import { BookTableContainer } from './BookTableContainer';
+import { BookFetch } from './BookFetch';
 
 export const App = () => (
   <div id="app">
     <Header />
-    <BookTableContainer />
+    <BookFetch />
   </div>
 );
