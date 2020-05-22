@@ -34,6 +34,11 @@ header {
   font-style: italic;
 }
 
+.header-button:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 /* || Book Table */
 .table {
   display: flex;
