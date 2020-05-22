@@ -110,10 +110,11 @@ header {
 
   .table-cell {
     margin: 1px;
-    padding: 1px 1em;
+    padding: 1px 0.5em;
     font-size: 1em;
     color: black;
     flex: 1;
+    min-width: 80px;
   }
 
   .title, .title-header {
