@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { BookListDisplay } from './BookListDisplay';
+import { HeaderButton } from './HeaderButton'
 
 export class BookSorter extends React.Component {
   constructor(props) {
@@ -15,29 +16,9 @@ export class BookSorter extends React.Component {
     this.sortBooks = this.sortBooks.bind(this);
   }
 
-  // Changes state to values based on click, THEN calls sorting function
+  // Change state to values based on click, THEN calls sorting function
   handleClick(e) {
-    // Grab field to sort by from header button
-    let field;
-    switch (e.target.innerText) {
-      case 'Title':
-        field = 'title';
-        break;
-      case 'Author':
-        field = 'authorLastName';
-        break;
-      case 'Finished':
-        field = 'finished';
-        break;
-      case 'Language':
-        field = 'language';
-        break;
-      case 'Pages':
-        field = 'pages';
-        break;
-      default:
-        console.log("onClick: Something went wrong.");
-    }
+    const field = e.target.getAttribute("id");
 
     // Change state: sortBy OR toggle ascending/descending
     if (field === this.state.sortBy) {
@@ -74,17 +55,46 @@ export class BookSorter extends React.Component {
     return (
       <div className='table'>
         <div className='table-row table-header'>
-          <div className='table-cell title-header header-button'
-               onClick={this.handleClick}>Title</div>
-          <div className='table-cell author-header header-button'
-               onClick={this.handleClick}>Author</div>
-          <div className='table-cell date-header header-button'
-               onClick={this.handleClick}>Finished</div>
-          <div className='table-cell pages-header header-button'
-               onClick={this.handleClick}>Pages</div>
-          <div className='table-cell language-header header-button'
-               onClick={this.handleClick}>Language</div>
-          <div className='table-cell blurb-header header-button'>Blurb</div>
+          <HeaderButton
+            classes={'table-cell title-header header-button'}
+            handleClick={this.handleClick}
+            columnName={'Title'}
+            active={this.state.sortBy === 'title'}
+            asc={this.state.ascend}
+            id={'title'}
+          />
+          <HeaderButton
+            classes={'table-cell author-header header-button'}
+            handleClick={this.handleClick}
+            columnName={'Author'}
+            active={this.state.sortBy === 'authorLastName'}
+            asc={this.state.ascend}
+            id={'authorLastName'}
+          />
+          <HeaderButton
+            classes={'table-cell date-header header-button'}
+            handleClick={this.handleClick}
+            columnName={'Finished'}
+            active={this.state.sortBy === 'finished'}
+            asc={this.state.ascend}
+            id={'finished'}
+          />
+          <HeaderButton
+            classes={'table-cell pages-header header-button'}
+            handleClick={this.handleClick}
+            columnName={'Pages'}
+            active={this.state.sortBy === 'pages'}
+            asc={this.state.ascend}
+            id={'pages'}
+          />
+          <HeaderButton
+            classes={'table-cell language-header header-button'}
+            handleClick={this.handleClick}
+            columnName={'Language'}
+            active={this.state.sortBy === 'language'}
+            asc={this.state.ascend}
+            id={'language'}
+          />
         </div>
         <BookListDisplay books={this.state.books}/>
       </div>
