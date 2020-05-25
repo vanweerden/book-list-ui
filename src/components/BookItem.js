@@ -1,14 +1,14 @@
 // Present individual books as table rows
 import React from 'react';
-import { convertDate } from '../utils/convertDate'
+import { parseDate } from '../utils/convertDate'
 
 export const BookItem = (props) => {
   const title = props.book.title;
   const authorFirst = props.book.authorFirstName;
   const authorLast = props.book.authorLastName;
-  const finished = convertDate(props.book.finished);
+  const finished = parseDate(props.book.finished);
   const pages = props.book.pages;
-  const language = props.book.language;
+  const language = props.book.language.charAt(0).toUpperCase() + props.book.language.slice(1);
   const blurb = props.book.blurb;
 
   return (
