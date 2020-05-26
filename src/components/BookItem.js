@@ -1,6 +1,6 @@
 // Present individual books as table rows
 import React from 'react';
-import { parseDate } from '../utils/convertDate'
+import { parseDate } from '../utils/dateFunctions'
 
 export const BookItem = (props) => {
   const title = props.book.title;

@@ -9,7 +9,12 @@ export function parseDate(d) {
   return dateString;
 }
 
-// Takes date and encodes it into MySQL MySQL YYYY-MM-DD
-export function encodeDate(d) {
-
+// Returns today's date in format YYYY-MM-DD
+export function today() {
+  var today = new Date();
+  const dd = String(today.getDate()).padStart(2, '0');
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const yyyy = today.getFullYear();
+  today = yyyy + '-' + mm + '-' + dd;
+  return today;
 }
