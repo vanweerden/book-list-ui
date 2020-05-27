@@ -12,14 +12,16 @@ export class AddBook extends React.Component {
       title: '',
       author: '',
       finished: today(),
-      pages: null,
+      pages: '',
       language: 'english',
       blurb: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
+    // Save input to state
     const target = event.target;
     const value = target.value;
     const name = target.name;
@@ -29,14 +31,40 @@ export class AddBook extends React.Component {
     });
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    let entry = this.state;
+
+    // Add correct properties
+    let fullname = entry.author;
+    delete entry.author;
+    entry.authorFirstName = parseName(fullname, 'first');
+    entry.authorLastName = parseName(fullname, 'last');
+
+    fetch('http://localhost:5000/books', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(entry),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success', data)
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  }
+
   render() {
     return (
-      <form method="post" action="">
+      <form method="post" onSubmit={this.handleSubmit}>
         <input  type="text"
                 id="form-title"
                 name="title"
                 placeholder="Title"
-                maxlength="50"
+                maxLength="50"
                 onChange={this.handleChange}
                 value={this.state.title}
                 required />
@@ -44,7 +72,7 @@ export class AddBook extends React.Component {
                 id="form-author"
                 name="author"
                 placeholder="Author: First Last"
-                maxlength="40"
+                maxLength="40"
                 onChange={this.handleChange}
                 value={this.state.author}
                 />
@@ -59,7 +87,7 @@ export class AddBook extends React.Component {
                 name="pages"
                 value={this.state.pages}
                 placeholder="Pages"
-                maxlength="4"
+                maxLength="4"
                 onChange={this.handleChange}
                 />
         <select name="language" id="form-language"
@@ -74,9 +102,10 @@ export class AddBook extends React.Component {
                   placeholder="Summary (240 characters)"
                   onChange={this.handleChange}
                   value={this.state.blurb}
-                  maxlength="140" />
+                  maxLength="140" />
         <input  type="submit"
                 value="Add Book"
+                onSubmit={this.sendData}
                 />
       </form>
     )
