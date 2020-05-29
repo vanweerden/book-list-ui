@@ -15,6 +15,7 @@ export class AddBook extends React.Component {
       pages: '',
       language: 'english',
       blurb: '',
+      type: 'fiction',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -88,14 +89,18 @@ export class AddBook extends React.Component {
                 value={this.state.pages}
                 placeholder="Pages"
                 maxLength="4"
-                onChange={this.handleChange}
-                />
+                onChange={this.handleChange}/>
         <select name="language" id="form-language"
                 onChange={this.handleChange}>
           <option value="english">English</option>
           <option value="japanese">Japanese</option>
           <option value="french">French</option>
           <option value="latin">Latin</option>
+        </select>
+        <select name="type" id="form-type"
+                onChange={this.handleChange}>
+          <option value="fic">Fiction</option>
+          <option value="nf">Non-Fiction</option>
         </select>
         <textarea name="blurb"
                   id="form-blurb"
