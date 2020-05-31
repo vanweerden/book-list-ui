@@ -5,18 +5,20 @@ import React from 'react';
 import { parseName } from '../utils/parseName';
 import { today } from '../utils/dateFunctions';
 
+const defaultState = {
+  title: '',
+  author: '',
+  finished: today(),
+  pages: '',
+  language: 'english',
+  blurb: '',
+  type: 'fiction',
+};
+
 export class AddBook extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      title: '',
-      author: '',
-      finished: today(),
-      pages: '',
-      language: 'english',
-      blurb: '',
-      type: 'fiction',
-    };
+    this.state = defaultState;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -56,6 +58,7 @@ export class AddBook extends React.Component {
     .catch((error) => {
       console.error('Error:', error);
     });
+    this.setState(defaultState);
   }
 
   render() {
