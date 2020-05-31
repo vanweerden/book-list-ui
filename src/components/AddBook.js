@@ -1,6 +1,4 @@
 // POSTS new book to database
-// NOTE: use parseName(name, ['first'/'last']) before sending
-
 import React from 'react';
 import { parseName } from '../utils/parseName';
 import { today } from '../utils/dateFunctions';

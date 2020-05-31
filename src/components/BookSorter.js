@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { BookListDisplay } from './BookListDisplay';
-import { HeaderButton } from './HeaderButton'
+import { HeaderButton } from './HeaderButton';
+import { AddBook } from './AddBook';
 
 export class BookSorter extends React.Component {
   constructor(props) {
@@ -51,6 +52,11 @@ export class BookSorter extends React.Component {
     this.setState({ books: sortedBooks });
   }
 
+  // Update state when new book is posted to database
+  addNewBook(book) {
+    this.setState({});
+  }
+
   render() {
     return (
       <div className='table'>
@@ -97,6 +103,7 @@ export class BookSorter extends React.Component {
           />
         </div>
         <BookListDisplay books={this.state.books}/>
+        <AddBook />
       </div>
     );
   }
