@@ -53,8 +53,8 @@ export class AddBook extends React.Component {
     .then(response => response.json())
     .then(data => {
       console.log('Success', data);
-      // Callback from parent (BookFetch) to add new book to BookFetch state
-      this.props.callbackFromParent(data);
+      // Callback from parent (BookFetch) to rerender from db after post
+      this.props.onPost();
     })
     .catch((error) => {
       console.error('Error:', error);

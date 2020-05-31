@@ -12,30 +12,32 @@ export class BookFetch extends React.Component {
     this.state = {
       books: null,
     };
+    this.fetchBooks = this.fetchBooks.bind(this);
     this.postedNewBook = this.postedNewBook.bind(this);
   }
 
-  componentDidMount() {
+  fetchBooks() {
     const url = 'http://localhost:5000/books';
     fetch(url)
       .then( res => {
         console.log(res);
         return res.json();
       })
-      .then( books => {
-        console.log("Initial state: ", books);
-        this.setState({ books });
+      .then( data => {
+        console.log("Data Fetched: ", data);
+        this.setState({ books: data });
       }
     )
     .catch(err => console.log("ERROR:", err.message));
   }
 
-  // Add book to state when book posted to db in AddBook
-  postedNewBook(dataFromChild) {
-    this.setState((state) => ({
-      books: state.books.concat(dataFromChild),
-    }),
-    () => console.log("State updated", this.state));
+  componentDidMount() {
+    this.fetchBooks();
+  }
+
+  // Triggered by POST in AddBook
+  postedNewBook() {
+    this.fetchBooks();
   }
 
   render() {
@@ -45,7 +47,7 @@ export class BookFetch extends React.Component {
       return (
         <div>
           <BookSorter books={this.state.books} />
-          <AddBook callbackFromParent={this.postedNewBook} />
+          <AddBook onPost={this.postedNewBook} />
         </div>
       );
     }
