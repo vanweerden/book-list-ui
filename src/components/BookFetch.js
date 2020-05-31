@@ -4,6 +4,7 @@
 import React from 'react';
 // import ReactDOM from 'react-dom';
 import { BookSorter } from './BookSorter';
+import { AddBook } from './AddBook';
 
 export class BookFetch extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export class BookFetch extends React.Component {
     this.state = {
       books: null,
     };
+    this.postedNewBook = this.postedNewBook.bind(this);
   }
 
   componentDidMount() {
@@ -21,11 +23,19 @@ export class BookFetch extends React.Component {
         return res.json();
       })
       .then( books => {
-        console.log(books);
+        console.log("Initial state: ", books);
         this.setState({ books });
       }
     )
     .catch(err => console.log("ERROR:", err.message));
+  }
+
+  // Add book to state when book posted to db in AddBook
+  postedNewBook(dataFromChild) {
+    this.setState((state) => ({
+      books: state.books.concat(dataFromChild),
+    }),
+    () => console.log("State updated", this.state));
   }
 
   render() {
@@ -33,7 +43,10 @@ export class BookFetch extends React.Component {
       return <div>Loading...</div>
     } else {
       return (
-        <BookSorter books={this.state.books} />
+        <div>
+          <BookSorter books={this.state.books} />
+          <AddBook callbackFromParent={this.postedNewBook} />
+        </div>
       );
     }
   }

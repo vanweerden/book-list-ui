@@ -41,6 +41,7 @@ export class AddBook extends React.Component {
     delete entry.author;
     entry.authorFirstName = parseName(fullname, 'first');
     entry.authorLastName = parseName(fullname, 'last');
+    entry.pages = parseInt(entry.pages);
 
     fetch('http://localhost:5000/books', {
       method: 'POST',
@@ -51,7 +52,9 @@ export class AddBook extends React.Component {
     })
     .then(response => response.json())
     .then(data => {
-      console.log('Success', data)
+      console.log('Success', data);
+      // Callback from parent (BookFetch) to add new book to BookFetch state
+      this.props.callbackFromParent(data);
     })
     .catch((error) => {
       console.error('Error:', error);
