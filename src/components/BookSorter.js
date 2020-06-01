@@ -1,14 +1,13 @@
 // Receives array of books from BookFetch and sorts them based on field chosen and asc/desc
 
-import React from 'react';
+import React, { Component } from 'react';
 import { BookListDisplay } from './BookListDisplay';
-import { HeaderButton } from './HeaderButton';
+import { TableHeader } from './TableHeader';
 
 export class BookSorter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: this.props.books,
       sortBy: 'finished',
       ascend: false
     };
@@ -29,11 +28,11 @@ export class BookSorter extends React.Component {
       this.setState((state, props) => ({
         sortBy: field,
         ascend: true
-      }), this.sortBooks);
+      }));
     }
   }
 
-  sortBooks() {
+  sortBooks(unsorted) {
     const field = this.state.sortBy;
     const asc = this.state.ascend;
 
@@ -48,55 +47,20 @@ export class BookSorter extends React.Component {
       }
     });
 
-    this.setState({ books: sortedBooks });
+    return sortedBooks;
   }
 
   render() {
+    const sortedBooks = this.sortBooks(this.props.books);
+
     return (
       <div className='table'>
-        <div className='table-row table-header'>
-          <HeaderButton
-            classes={'table-cell title-header header-button'}
-            handleClick={this.handleClick}
-            columnName={'Title'}
-            active={this.state.sortBy === 'title'}
-            asc={this.state.ascend}
-            id={'title'}
-          />
-          <HeaderButton
-            classes={'table-cell author-header header-button'}
-            handleClick={this.handleClick}
-            columnName={'Author'}
-            active={this.state.sortBy === 'authorLastName'}
-            asc={this.state.ascend}
-            id={'authorLastName'}
-          />
-          <HeaderButton
-            classes={'table-cell date-header header-button'}
-            handleClick={this.handleClick}
-            columnName={'Finished'}
-            active={this.state.sortBy === 'finished'}
-            asc={this.state.ascend}
-            id={'finished'}
-          />
-          <HeaderButton
-            classes={'table-cell pages-header header-button'}
-            handleClick={this.handleClick}
-            columnName={'Pages'}
-            active={this.state.sortBy === 'pages'}
-            asc={this.state.ascend}
-            id={'pages'}
-          />
-          <HeaderButton
-            classes={'table-cell language-header header-button'}
-            handleClick={this.handleClick}
-            columnName={'Language'}
-            active={this.state.sortBy === 'language'}
-            asc={this.state.ascend}
-            id={'language'}
-          />
-        </div>
-        <BookListDisplay books={this.state.books}/>
+        <TableHeader
+          handleClick={this.handleClick}
+          active={this.state.sortBy}
+          ascend={this.state.scend}
+        />
+        <BookListDisplay books={sortedBooks}/>
       </div>
     );
   }
