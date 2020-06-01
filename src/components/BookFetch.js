@@ -1,7 +1,7 @@
 // Stateful container for BookList component
 // Fetches book list from API and stores them in state
 
-import React from 'react';
+import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
 import { BookSorter } from './BookSorter';
 import { AddBook } from './AddBook';
