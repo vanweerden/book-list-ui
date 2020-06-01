@@ -1,5 +1,5 @@
 // POSTS new book to database
-import React from 'react';
+import React, { Component } from 'react';
 import { parseName } from '../utils/parseName';
 import { today } from '../utils/dateFunctions';
 
