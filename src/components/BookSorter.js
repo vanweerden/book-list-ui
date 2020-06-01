@@ -1,8 +1,7 @@
 // Receives array of books from BookFetch and sorts them based on field chosen and asc/desc
 
 import React, { Component } from 'react';
-import { BookListDisplay } from './BookListDisplay';
-import { TableHeader } from './TableHeader';
+import { TableDisplay } from './TableDisplay';
 
 export class BookSorter extends React.Component {
   constructor(props) {
@@ -54,14 +53,12 @@ export class BookSorter extends React.Component {
     const sortedBooks = this.sortBooks(this.props.books);
 
     return (
-      <div className='table'>
-        <TableHeader
-          handleClick={this.handleClick}
-          active={this.state.sortBy}
-          ascend={this.state.scend}
-        />
-        <BookListDisplay books={sortedBooks}/>
-      </div>
+      <TableDisplay
+        handleClick={this.handleClick}
+        active={this.state.sortBy}
+        ascend={this.state.ascend}
+        books={sortedBooks}
+      />
     );
   }
 }
