@@ -45,11 +45,8 @@ export class BookFetch extends React.Component {
       return <div>Loading...</div>
     } else {
       return (
-        <div>
-          <BookSorter books={this.state.books}
-                      postedNewBook={this.postedNewBook} />
-          <AddBook onPost={this.postedNewBook} />
-        </div>
+        <BookSorter books={this.state.books}
+                    postedNewBook={this.postedNewBook} />
       );
     }
   }
