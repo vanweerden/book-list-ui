@@ -122,28 +122,18 @@ header {
     min-width: 80px;
   }
 
-  .title, .title-header {
+  .title, .title-header, .form-title {
     flex-grow: 4;
   }
 
-  .author, .author-header {
+  .author, .author-header, .form-author {
     flex-grow: 1.5;
   }
 
-  /* || Add Book Form */
-  #new-book-form {
-    display: flex;
+  .form-bottom {
     flex-direction: column;
     justify-content: space-around;
-    align-items: flex-start;
+    align-items: center;
+    height: 10em;
   }
-
-  #form-title {
-    flex-grow: 4;
-  }
-
-  #form-author {
-    flex-grow: 1.5;
-  }
-
 }

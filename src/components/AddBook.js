@@ -106,7 +106,7 @@ export class AddBook extends React.Component {
             <option value="latin">Latin</option>
           </select>
         </div>
-        <div className="table-row form-row">
+        <div className="table-row form-bottom">
           <select name="type" id="form-type"
                   onChange={this.handleChange}>
             <option value="fic">Fiction</option>
