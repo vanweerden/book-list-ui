@@ -83,6 +83,11 @@ header {
   font-size: 0.8em;
 }
 
+/* || AddBook form */
+
+
+
+
 /* || Media queries */
 @media screen and (min-width: 600px) {
   .table-row {
@@ -122,6 +127,22 @@ header {
   }
 
   .author, .author-header {
+    flex-grow: 1.5;
+  }
+
+  /* || Add Book Form */
+  #new-book-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+
+  #form-title {
+    flex-grow: 4;
+  }
+
+  #form-author {
     flex-grow: 1.5;
   }
 

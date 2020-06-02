@@ -35,7 +35,7 @@ export class BookFetch extends React.Component {
     this.fetchBooks();
   }
 
-  // Triggered by POST in AddBook
+  // Triggered by POST in AddBook (passed as prop)
   postedNewBook() {
     this.fetchBooks();
   }
@@ -46,7 +46,8 @@ export class BookFetch extends React.Component {
     } else {
       return (
         <div>
-          <BookSorter books={this.state.books} />
+          <BookSorter books={this.state.books}
+                      postedNewBook={this.postedNewBook} />
           <AddBook onPost={this.postedNewBook} />
         </div>
       );

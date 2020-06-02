@@ -4,6 +4,7 @@
 import React from 'react';
 import { TableHeader } from './TableHeader';
 import { BookListDisplay } from './BookListDisplay';
+import { AddBook } from './AddBook';
 
 export const TableDisplay = (props) => {
   return (
@@ -14,6 +15,9 @@ export const TableDisplay = (props) => {
         ascend={props.ascend}
       />
       <BookListDisplay books={props.books}/>
+      <AddBook
+        postedNewBook={props.postedNewBook}
+      />
     </div>
   );
 };

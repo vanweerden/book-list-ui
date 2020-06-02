@@ -54,7 +54,7 @@ export class AddBook extends React.Component {
     .then(data => {
       console.log('Success', data);
       // Callback from parent (BookFetch) to rerender from db after post
-      this.props.onPost();
+      this.props.postedNewBook();
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -64,58 +64,65 @@ export class AddBook extends React.Component {
 
   render() {
     return (
-      <form method="post" onSubmit={this.handleSubmit}>
-        <input  type="text"
-                id="form-title"
-                name="title"
-                placeholder="Title"
-                maxLength="50"
-                onChange={this.handleChange}
-                value={this.state.title}
-                required />
-        <input  type="text"
-                id="form-author"
-                name="author"
-                placeholder="Author: First Last"
-                maxLength="40"
-                onChange={this.handleChange}
-                value={this.state.author}
-                />
-        <input  type="date"
-                id="form-finished"
-                name="finished"
-                onChange={this.handleChange}
-                value={this.state.finished}
-                required/>
-        <input  type="text"
-                id="form-pages"
-                name="pages"
-                value={this.state.pages}
-                placeholder="Pages"
-                maxLength="4"
-                onChange={this.handleChange}/>
-        <select name="language" id="form-language"
-                onChange={this.handleChange}>
-          <option value="english">English</option>
-          <option value="japanese">Japanese</option>
-          <option value="french">French</option>
-          <option value="latin">Latin</option>
-        </select>
-        <select name="type" id="form-type"
-                onChange={this.handleChange}>
-          <option value="fic">Fiction</option>
-          <option value="nf">Non-Fiction</option>
-        </select>
-        <textarea name="blurb"
-                  id="form-blurb"
-                  placeholder="Summary (240 characters)"
+      <form
+        method="post"
+        onSubmit={this.handleSubmit}
+        id="new-book-form">
+        <div className='table-row form-row'>
+          <input  type="text"
+                  className="table-cell form-title"
+                  name="title"
+                  placeholder="Title"
+                  maxLength="50"
                   onChange={this.handleChange}
-                  value={this.state.blurb}
-                  maxLength="140" />
-        <input  type="submit"
-                value="Add Book"
-                onSubmit={this.sendData}
-                />
+                  value={this.state.title}
+                  required />
+          <input  type="text"
+                  className="table-cell form-author"
+                  name="author"
+                  placeholder="Author: First Last"
+                  maxLength="40"
+                  onChange={this.handleChange}
+                  value={this.state.author}
+                  />
+          <input  type="date"
+                  className="table-cell form-finished"
+                  name="finished"
+                  onChange={this.handleChange}
+                  value={this.state.finished}
+                  required/>
+          <input  type="text"
+                  className="table-cell form-pages"
+                  name="pages"
+                  value={this.state.pages}
+                  placeholder="Pages"
+                  maxLength="4"
+                  onChange={this.handleChange}/>
+          <select name="language" className="table-cell form-language"
+                  onChange={this.handleChange}>
+            <option value="english">English</option>
+            <option value="japanese">Japanese</option>
+            <option value="french">French</option>
+            <option value="latin">Latin</option>
+          </select>
+        </div>
+        <div className="table-row form-row">
+          <select name="type" id="form-type"
+                  onChange={this.handleChange}>
+            <option value="fic">Fiction</option>
+            <option value="nf">Non-Fiction</option>
+          </select>
+          <textarea name="blurb"
+                    id="form-blurb"
+                    placeholder="Summary (240 characters)"
+                    onChange={this.handleChange}
+                    value={this.state.blurb}
+                    maxLength="140" />
+          <input  type="submit"
+                  value="Add Book"
+                  onSubmit={this.sendData}
+                  />
+        </div>
       </form>
     )
   }
