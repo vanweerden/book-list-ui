@@ -27,11 +27,45 @@ export class AddBook extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // Validate input and save to state
   handleChange(event) {
-    // Save input to state
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+    event.preventDefault();
+    const { name, value } = event.target;
+    let errors = this.state.errors;
+
+    // Author must be one or two words and only alpha characters
+    const authorRegexp = /^[a-z]+( [a-z]+)?$/i;
+
+    switch (name) {
+      case 'title':
+        errors.title =
+          value.length <= 50
+            ? 'Title cannot be more than 50 characters long!'
+            : '';
+        break;
+      case 'author':
+        errors.author =
+          value.length <= 40
+            ? 'Author cannot me more than 40 characters long!'
+            : '';
+          errors.author =
+            authorRegexp.test(value)
+              ? 'Must be one or two words, with alphabet characters only!'
+              : '';
+        break;
+      case 'pages':
+        errors.pages =
+          Number.isInteger(value)
+            ? 'Please enter a number'
+            : '';
+        break;
+      case 'blurb':
+        errors.blurb =
+          value.length <= 240
+            ? 'Blurb must be 240 characters or fewer!'
+            : '';
+        break;
+    }
 
     this.setState({
       [name]: value
