@@ -136,4 +136,8 @@ header {
     align-items: center;
     height: 10em;
   }
+
+  .form-finished {
+    flex-grow: 1.1;
+  }
 }

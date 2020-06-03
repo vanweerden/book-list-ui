@@ -11,6 +11,12 @@ const defaultState = {
   language: 'english',
   blurb: '',
   type: 'fiction',
+  errors: {
+    title: '',
+    author: '',
+    pages: '',
+    blurb: '',
+  }
 };
 
 export class AddBook extends React.Component {
@@ -67,7 +73,8 @@ export class AddBook extends React.Component {
       <form
         method="post"
         onSubmit={this.handleSubmit}
-        id="new-book-form">
+        id="new-book-form"
+        noValidate>
         <div className='table-row form-row'>
           <input  type="text"
                   className="table-cell form-title"
