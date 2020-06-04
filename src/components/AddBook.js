@@ -25,6 +25,17 @@ export class AddBook extends React.Component {
     this.state = defaultState;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.validateForm = this.validateForm.bind(this);
+  }
+
+  validateForm(errors) {
+    let valid = true;
+    // Add to Anki
+    Object.values(errors).forEach(
+      // If there is an error string, sets value to false
+      val => val.length > 0 && (valid = false)
+    );
+    return valid;
   }
 
   // Validate input and save to state
@@ -35,46 +46,55 @@ export class AddBook extends React.Component {
 
     // Author must be one or two words and only alpha characters
     const authorRegexp = /^[a-z]+( [a-z]+)?$/i;
+    const pagesRegexp = /^\d+$/;
 
     switch (name) {
       case 'title':
         errors.title =
-          value.length <= 50
+          value.length > 50
             ? 'Title cannot be more than 50 characters long!'
             : '';
         break;
       case 'author':
         errors.author =
-          value.length <= 40
+          value.length > 40
             ? 'Author cannot me more than 40 characters long!'
             : '';
           errors.author =
             authorRegexp.test(value)
-              ? 'Must be one or two words, with alphabet characters only!'
-              : '';
+              ? ''
+              : 'Must be one or two words, with alphabet characters only!';
         break;
       case 'pages':
         errors.pages =
-          Number.isInteger(value)
-            ? 'Please enter a number'
-            : '';
+          pagesRegexp.test(value)
+            ? ''
+            : 'That is not a number!';
         break;
       case 'blurb':
         errors.blurb =
-          value.length <= 240
+          value.length > 240
             ? 'Blurb must be 240 characters or fewer!'
             : '';
         break;
     }
 
-    this.setState({
-      [name]: value
+    this.setState({errors, [name]: value}, () => {
+      console.log(errors[name]);
     });
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    // Check for errors
+    if (this.validateForm(this.state.errors)) {
+      console.log('Valid form');
+    } else {
+      console.log('Invalid form');
+    }
+
     let entry = this.state;
+    delete entry.errors;
 
     // Add correct properties
     let fullname = entry.author;
@@ -103,6 +123,8 @@ export class AddBook extends React.Component {
   }
 
   render() {
+    const {errors} = this.state;
+
     return (
       <form
         method="post"
@@ -118,6 +140,9 @@ export class AddBook extends React.Component {
                   onChange={this.handleChange}
                   value={this.state.title}
                   required />
+          { errors.title > 0 &&
+            <span className='error'>{errors.title}</span> }
+
           <input  type="text"
                   className="table-cell form-author"
                   name="author"
@@ -126,12 +151,16 @@ export class AddBook extends React.Component {
                   onChange={this.handleChange}
                   value={this.state.author}
                   />
+          { errors.author > 0 &&
+            <span className='error'>{errors.author}</span> }
+
           <input  type="date"
                   className="table-cell form-finished"
                   name="finished"
                   onChange={this.handleChange}
                   value={this.state.finished}
                   required/>
+
           <input  type="text"
                   className="table-cell form-pages"
                   name="pages"
@@ -139,6 +168,9 @@ export class AddBook extends React.Component {
                   placeholder="Pages"
                   maxLength="4"
                   onChange={this.handleChange}/>
+          {errors.pages > 0 &&
+            <div className='error'>{errors.pages}</div>}
+
           <select name="language" className="table-cell form-language"
                   onChange={this.handleChange}>
             <option value="english">English</option>
@@ -159,6 +191,9 @@ export class AddBook extends React.Component {
                     onChange={this.handleChange}
                     value={this.state.blurb}
                     maxLength="140" />
+          {errors.blurb > 0 &&
+            <span className='error'>{errors.blurb}</span>}
+
           <input  type="submit"
                   value="Add Book"
                   onSubmit={this.sendData}
