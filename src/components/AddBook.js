@@ -178,7 +178,8 @@ export class AddBook extends React.Component {
 
           <div className="table-cell form-cell form-language">
             <select name="language"
-                    onChange={this.handleChange}>
+                    onChange={this.handleChange}
+                    className="clickable">
               <option value="english">English</option>
               <option value="japanese">Japanese</option>
               <option value="french">French</option>
@@ -190,6 +191,7 @@ export class AddBook extends React.Component {
 
         <div className="table-row form-bottom">
           <select name="type" id="form-type"
+                  className="clickable form-cell"
                   onChange={this.handleChange}>
             <option value="fic">Fiction</option>
             <option value="nf">Non-Fiction</option>
@@ -205,6 +207,7 @@ export class AddBook extends React.Component {
 
           <input  type="submit"
                   value="Add Book"
+                  className="button submit-button"
                   onSubmit={this.sendData}
                   />
         </div>
