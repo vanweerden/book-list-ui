@@ -69,7 +69,7 @@ export class AddBook extends React.Component {
         errors.pages =
           pagesRegexp.test(value)
             ? ''
-            : 'That is not a number!';
+            : 'Please enter a number!';
         break;
       case 'blurb':
         errors.blurb =
@@ -131,54 +131,72 @@ export class AddBook extends React.Component {
         onSubmit={this.handleSubmit}
         id="new-book-form"
         noValidate>
+
+        {/*First row of form*/}
         <div className='table-row form-row'>
-          <input  type="text"
-                  className="table-cell form-title"
-                  name="title"
-                  placeholder="Title"
-                  maxLength="50"
-                  onChange={this.handleChange}
-                  value={this.state.title}
-                  required />
-          { errors.title > 0 &&
-            <span className='error'>{errors.title}</span> }
+          <div className="table-cell form-title">
+            <input  type="text"
+                    name="title"
+                    placeholder="Title"
+                    maxLength="50"
+                    onChange={this.handleChange}
+                    value={this.state.title}
+                    required />
+            { errors.title.length > 0 &&
+              <div className='error'>{errors.title}</div> }
+          </div>
 
-          <input  type="text"
-                  className="table-cell form-author"
-                  name="author"
-                  placeholder="Author: First Last"
-                  maxLength="40"
-                  onChange={this.handleChange}
-                  value={this.state.author}
-                  />
-          { errors.author > 0 &&
-            <span className='error'>{errors.author}</span> }
+          <div className="table-cell form-author">
+            <input  type="text"
+                    name="author"
+                    placeholder="Author: First Last"
+                    maxLength="40"
+                    onChange={this.handleChange}
+                    value={this.state.author}
+                    />
+            { errors.author.length > 0 &&
+              <div className='error'>{errors.author}</div> }
+          </div>
 
-          <input  type="date"
-                  className="table-cell form-finished"
-                  name="finished"
-                  onChange={this.handleChange}
-                  value={this.state.finished}
-                  required/>
+          <div className="table-cell form-finished">
+            <input  type="date"
+                    name="finished"
+                    onChange={this.handleChange}
+                    value={this.state.finished}
+                    required/>
+          </div>
 
-          <input  type="text"
-                  className="table-cell form-pages"
-                  name="pages"
-                  value={this.state.pages}
-                  placeholder="Pages"
-                  maxLength="4"
-                  onChange={this.handleChange}/>
-          {errors.pages > 0 &&
-            <div className='error'>{errors.pages}</div>}
+          <div className="table-cell form-pages">
+            <input  type="text"
+                    name="pages"
+                    value={this.state.pages}
+                    placeholder="Pages"
+                    maxLength="4"
+                    onChange={this.handleChange}/>
+            { errors.pages.length > 0 &&
+              <div className='error'>{errors.pages}</div> }
+          </div>
 
-          <select name="language" className="table-cell form-language"
-                  onChange={this.handleChange}>
-            <option value="english">English</option>
-            <option value="japanese">Japanese</option>
-            <option value="french">French</option>
-            <option value="latin">Latin</option>
-          </select>
+          <div className="table-cell form-language">
+            <select name="language"
+                    onChange={this.handleChange}>
+              <option value="english">English</option>
+              <option value="japanese">Japanese</option>
+              <option value="french">French</option>
+              <option value="latin">Latin</option>
+            </select>
+          </div>
         </div>
+
+        {/* Error row */}
+        <div className="table-row error-row">
+            <div className='error form-title'>{errors.title.length > 0 && errors.title}</div>
+            <div className='error form-author'>{errors.author.length > 0 && errors.author}</div>
+            <div className='error form-finished'></div>
+            <div className='error form-pages'>{errors.pages.length > 0 && errors.pages}</div>
+            <div className='error form-language'></div>
+        </div>
+
         <div className="table-row form-bottom">
           <select name="type" id="form-type"
                   onChange={this.handleChange}>
@@ -191,7 +209,7 @@ export class AddBook extends React.Component {
                     onChange={this.handleChange}
                     value={this.state.blurb}
                     maxLength="140" />
-          {errors.blurb > 0 &&
+          {errors.blurb.length > 0 &&
             <span className='error'>{errors.blurb}</span>}
 
           <input  type="submit"

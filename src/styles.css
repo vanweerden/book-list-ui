@@ -84,7 +84,9 @@ header {
 }
 
 /* || AddBook form */
-
+input {
+  width: 100%;
+}
 
 
 
@@ -139,5 +141,9 @@ header {
 
   .form-finished {
     flex-grow: 1.1;
+  }
+
+  .error-row {
+    border: none;
   }
 }
