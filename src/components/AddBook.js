@@ -91,6 +91,7 @@ export class AddBook extends React.Component {
       console.log('Valid form');
     } else {
       console.log('Invalid form');
+      return;
     }
 
     let entry = this.state;
