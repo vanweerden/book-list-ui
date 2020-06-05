@@ -52,29 +52,29 @@ export class AddBook extends React.Component {
       case 'title':
         errors.title =
           value.length > 50
-            ? 'Title cannot be more than 50 characters long!'
+            ? 'Must not be more than 50 characters in length!'
             : '';
         break;
       case 'author':
         errors.author =
           value.length > 40
-            ? 'Author cannot me more than 40 characters long!'
+            ? 'Cannot me more than 40 characters in length!'
             : '';
           errors.author =
-            authorRegexp.test(value)
+            value === '' || authorRegexp.test(value)
               ? ''
-              : 'Must be one or two words, with alphabet characters only!';
+              : 'Must be one or two names, with alphabet characters only!';
         break;
       case 'pages':
         errors.pages =
-          pagesRegexp.test(value)
+          value === '' || pagesRegexp.test(value)
             ? ''
             : 'Please enter a number!';
         break;
       case 'blurb':
         errors.blurb =
           value.length > 240
-            ? 'Blurb must be 240 characters or fewer!'
+            ? 'Max 240 characters!'
             : '';
         break;
     }
@@ -134,7 +134,7 @@ export class AddBook extends React.Component {
 
         {/*First row of form*/}
         <div className='table-row form-row'>
-          <div className="table-cell form-title">
+          <div className="table-cell form-cell form-title">
             <input  type="text"
                     name="title"
                     placeholder="Title"
@@ -142,11 +142,10 @@ export class AddBook extends React.Component {
                     onChange={this.handleChange}
                     value={this.state.title}
                     required />
-            { errors.title.length > 0 &&
-              <div className='error'>{errors.title}</div> }
+              <div className='error'>{errors.title.length > 0 && errors.title}</div>
           </div>
 
-          <div className="table-cell form-author">
+          <div className="table-cell form-cell form-author">
             <input  type="text"
                     name="author"
                     placeholder="Author: First Last"
@@ -154,30 +153,29 @@ export class AddBook extends React.Component {
                     onChange={this.handleChange}
                     value={this.state.author}
                     />
-            { errors.author.length > 0 &&
-              <div className='error'>{errors.author}</div> }
+              <div className='error'>{errors.author.length > 0 && errors.author}</div>
           </div>
 
-          <div className="table-cell form-finished">
+          <div className="table-cell form-cell form-finished">
             <input  type="date"
                     name="finished"
                     onChange={this.handleChange}
                     value={this.state.finished}
                     required/>
+            <div className='error'></div>
           </div>
 
-          <div className="table-cell form-pages">
+          <div className="table-cell form-cell form-pages">
             <input  type="text"
                     name="pages"
                     value={this.state.pages}
                     placeholder="Pages"
                     maxLength="4"
                     onChange={this.handleChange}/>
-            { errors.pages.length > 0 &&
-              <div className='error'>{errors.pages}</div> }
+              <div className='error'>{errors.pages.length > 0 && errors.pages}</div>
           </div>
 
-          <div className="table-cell form-language">
+          <div className="table-cell form-cell form-language">
             <select name="language"
                     onChange={this.handleChange}>
               <option value="english">English</option>
@@ -185,16 +183,8 @@ export class AddBook extends React.Component {
               <option value="french">French</option>
               <option value="latin">Latin</option>
             </select>
+            <div className='error'></div>
           </div>
-        </div>
-
-        {/* Error row */}
-        <div className="table-row error-row">
-            <div className='error form-title'>{errors.title.length > 0 && errors.title}</div>
-            <div className='error form-author'>{errors.author.length > 0 && errors.author}</div>
-            <div className='error form-finished'></div>
-            <div className='error form-pages'>{errors.pages.length > 0 && errors.pages}</div>
-            <div className='error form-language'></div>
         </div>
 
         <div className="table-row form-bottom">
