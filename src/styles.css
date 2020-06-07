@@ -85,6 +85,18 @@ header {
   font-size: 0.8em;
 }
 
+.delete-button {
+  /* Delete me */
+  background-color: pink;
+  width: 2em;
+  height: 2em;
+  text-align: center;
+}
+
+.delete-button:hover {
+  cursor: pointer;
+}
+
 /* || AddBook form */
 input {
   width: 100%;
