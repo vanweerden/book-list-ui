@@ -1,5 +1,4 @@
 // Receives array of books from BookFetch and sorts them based on field chosen and asc/desc
-
 import React, { Component } from 'react';
 import { TableDisplay } from './TableDisplay';
 

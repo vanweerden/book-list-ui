@@ -3,8 +3,7 @@
 
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
-import { BookSorter } from './BookSorter';
-import { AddBook } from './AddBook';
+import { EditBooks } from './EditBooks';
 
 export class BookFetch extends React.Component {
   constructor(props) {
@@ -45,7 +44,7 @@ export class BookFetch extends React.Component {
       return <div>Loading...</div>
     } else {
       return (
-        <BookSorter books={this.state.books}
+        <EditBooks  books={this.state.books}
                     postedNewBook={this.postedNewBook} />
       );
     }
