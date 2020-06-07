@@ -4,7 +4,7 @@ import { parseDate } from '../utils/dateFunctions';
 import { DeleteButton } from './DeleteButton';
 
 export const BookItem = (props) => {
-  // React Hook
+  // useState returns current state value and function to update it
   const [isShown, setIsShown] = useState(false);
 
   const title = props.book.title;
