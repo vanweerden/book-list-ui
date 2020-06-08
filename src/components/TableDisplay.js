@@ -14,7 +14,10 @@ export const TableDisplay = (props) => {
         active={props.sortBy}
         ascend={props.ascend}
       />
-      <BookListDisplay books={props.books}/>
+      <BookListDisplay
+        books={props.books}
+        deleteMethod={props.deleteMethod}
+      />
       <AddBook
         postedNewBook={props.postedNewBook}
       />

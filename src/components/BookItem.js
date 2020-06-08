@@ -26,7 +26,7 @@ export const BookItem = (props) => {
       <div className='table-cell pages'>{pages}</div>
       <div className='table-cell language'>{language}</div>
       <div className='table-cell blurb'>{blurb}</div>
-      <DeleteButton id={id} content={isShown && 'x'}/>
+      <DeleteButton id={id} content={isShown && 'x'} deleteMethod={props.deleteMethod}/>
     </div>
   );
 }

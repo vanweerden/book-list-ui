@@ -4,7 +4,8 @@ export const DeleteButton = (props) => {
   const handleClick = () => console.log("Click!");
   return (
     <div  className='delete-button'
-          onClick={handleClick}>
+          onClick={() => props.deleteMethod(props.id)}
+    >
       {props.content}
     </div>
   );
