@@ -19,7 +19,7 @@ export const TableDisplay = (props) => {
         deleteMethod={props.deleteMethod}
       />
       <AddBook
-        postedNewBook={props.postedNewBook}
+        bookListChange={props.bookListChange}
       />
     </div>
   );

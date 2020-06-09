@@ -57,7 +57,7 @@ export class BookSorter extends React.Component {
         active={this.state.sortBy}
         ascend={this.state.ascend}
         books={sortedBooks}
-        postedNewBook={this.props.postedNewBook}
+        bookListChange={this.props.bookListChange}
         deleteMethod={this.props.deleteMethod}
       />
     );

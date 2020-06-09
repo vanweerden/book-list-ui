@@ -6,14 +6,15 @@ import { BookSorter } from './BookSorter';
 
 export const EditBooks = (props) => {
   let books = props.books;
+
   // Will be passed as prop to DeleteButton
   const deleteBook = (id) => {
-    return fetch('http://localhost:3000/books/' + id, {
+    var id = id;
+    return fetch('http://localhost:5000/books/' + id, {
       method: 'DELETE',
     })
     .then(res => res.text())
     .then(res => {
-      console.log(res);
       // Remove book from array before sending to BookSorter
       books = books.filter(book => book.id != id)
       console.log('Books array: ', books)
@@ -25,7 +26,7 @@ export const EditBooks = (props) => {
 
   return (
     <BookSorter books={books}
-                postedNewBook={props.postedNewBook}
+                bookListChange={props.bookListChange}
                 deleteMethod={deleteBook}/>
   );
 }

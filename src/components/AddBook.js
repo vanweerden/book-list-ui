@@ -115,7 +115,7 @@ export class AddBook extends React.Component {
     .then(data => {
       console.log('Success', data);
       // Callback from parent (BookFetch) to rerender from db after post
-      this.props.postedNewBook();
+      this.props.bookListChange();
     })
     .catch((error) => {
       console.error('Error:', error);

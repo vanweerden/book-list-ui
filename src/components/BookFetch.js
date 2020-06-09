@@ -12,7 +12,7 @@ export class BookFetch extends React.Component {
       books: null,
     };
     this.fetchBooks = this.fetchBooks.bind(this);
-    this.postedNewBook = this.postedNewBook.bind(this);
+    this.bookListChange = this.bookListChange.bind(this);
   }
 
   fetchBooks() {
@@ -35,7 +35,7 @@ export class BookFetch extends React.Component {
   }
 
   // Triggered by POST in AddBook (passed as prop)
-  postedNewBook() {
+  bookListChange() {
     this.fetchBooks();
   }
 
@@ -45,7 +45,7 @@ export class BookFetch extends React.Component {
     } else {
       return (
         <EditBooks  books={this.state.books}
-                    postedNewBook={this.postedNewBook} />
+                    bookListChange={this.bookListChange} />
       );
     }
   }
