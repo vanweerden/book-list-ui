@@ -5,7 +5,7 @@ import { DeleteButton } from './DeleteButton';
 
 export const BookItem = (props) => {
   // useState returns current state value and function to update it
-  const [isShown, setIsShown] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
 
   const title = props.book.title;
   const authorFirst = props.book.authorFirstName;
@@ -18,15 +18,18 @@ export const BookItem = (props) => {
 
   return (
     <div  className='table-row book-item'
-          onMouseEnter={() => setIsShown(true)}
-          onMouseLeave={() => setIsShown(false)}>
+          onMouseEnter={() => setShowDelete(true)}
+          onMouseLeave={() => setShowDelete(false)}>
       <div className='table-cell title'>{title}</div>
       <div className='table-cell author'>{authorFirst} {authorLast}</div>
       <div className='table-cell date'>{finished}</div>
       <div className='table-cell pages'>{pages}</div>
       <div className='table-cell language'>{language}</div>
       <div className='table-cell blurb'>{blurb}</div>
-      <DeleteButton id={id} content={isShown && 'x'} deleteMethod={props.deleteMethod}/>
+      <DeleteButton id={id}
+                    shouldRender={showDelete}
+                    deleteMethod={props.deleteMethod}
+                    />
     </div>
   );
 }

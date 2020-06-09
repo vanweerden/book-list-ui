@@ -86,11 +86,12 @@ header {
 }
 
 .delete-button {
-  /* Delete me */
-  background-color: pink;
-  width: 2em;
-  height: 2em;
+  /* border: solid 1px black; */
+  width: 1em;
+  height: 1em;
+  padding: 1em;
   text-align: center;
+  color: red;
 }
 
 .delete-button:hover {
