@@ -15,8 +15,11 @@ export const EditBooks = (props) => {
     })
     .then(res => res.text())
     .then(res => {
-      // Remove book from array before sending to BookSorter
-      books = books.filter(book => book.id != id)
+      // Remove book from array before sending to BookSorter (can't get BookSorter to re-render)
+      // books = books.filter(book => book.id != id)
+
+      // re-fetches book list (to trigger re-rendering)
+      props.bookListChange();
       console.log('Books array: ', books)
     })
     .catch((error) => {
