@@ -46,6 +46,7 @@ export const TableHeader = (props) => {
         asc={props.ascend}
         id={'language'}
       />
+      <div className={'table-cell header-button delete-spacer'}></div>
     </div>
   );
 }

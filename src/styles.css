@@ -166,14 +166,16 @@ select {
 
   .title, .title-header, .form-title {
     flex-grow: 4;
+    min-width: 12em;
   }
 
   .author, .author-header, .form-author {
     flex-grow: 1.5;
   }
 
-  .delete-spacer {
-    background-color: red;
+  .delete-spacer, .delete-button {
+    flex-grow: 0.5;
+    size:
   }
 
   .book-item {
