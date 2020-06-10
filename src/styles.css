@@ -90,7 +90,6 @@ header {
   width: 1em;
   height: 1em;
   padding: 1em;
-  text-align: center;
   color: red;
 }
 
@@ -144,11 +143,37 @@ select {
 
 /* || Media queries */
 @media screen and (min-width: 600px) {
+  /* Mobile Table Layout */
   .table-row {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+  }
+
+  .table-cell {
+    margin: 1px;
+    padding: 1px 0.5em;
+    font-size: 1em;
+    color: black;
+    flex: 1;
+    min-width: 80px;
+  }
+
+  .pages, .language {
+    display: block;
+  }
+
+  .title, .title-header, .form-title {
+    flex-grow: 4;
+  }
+
+  .author, .author-header, .form-author {
+    flex-grow: 1.5;
+  }
+
+  .delete-spacer {
+    background-color: red;
   }
 
   .book-item {
@@ -163,27 +188,7 @@ select {
     font-weight: normal;
   }
 
-  .pages, .language {
-    display: block;
-  }
-
-  .table-cell {
-    margin: 1px;
-    padding: 1px 0.5em;
-    font-size: 1em;
-    color: black;
-    flex: 1;
-    min-width: 80px;
-  }
-
-  .title, .title-header, .form-title {
-    flex-grow: 4;
-  }
-
-  .author, .author-header, .form-author {
-    flex-grow: 1.5;
-  }
-
+  /* Mobile Form */
   .form-bottom {
     flex-direction: column;
     justify-content: space-around;
@@ -194,4 +199,5 @@ select {
   .form-finished {
     flex-grow: 1.1;
   }
+
 }
