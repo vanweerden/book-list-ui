@@ -34,7 +34,6 @@ export class BookSorter extends React.Component {
     const field = this.state.sortBy;
     const asc = this.state.ascend;
 
-    // const sortedBooks = this.state.books.sort( function(a, b) {
     const sortedBooks = this.props.books.sort( function(a, b) {
       a = a[field];
       b = b[field];

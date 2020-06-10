@@ -11,7 +11,7 @@ export const TableDisplay = (props) => {
     <div className='table'>
       <TableHeader
         handleClick={props.handleClick}
-        active={props.sortBy}
+        active={props.active}
         ascend={props.ascend}
       />
       <BookListDisplay
