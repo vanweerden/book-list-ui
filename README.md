@@ -1,5 +1,5 @@
 ## Book List UI
-This is a front end interface for my book-list app (an EXTREMELY basic GoodReads-style CRUD app).
+This is a front end interface for my [book-list app](https://github.com/vanweerden/book-list) (an EXTREMELY basic GoodReads-style CRUD app).
 
 ### Built with
 * [Create React App](https://github.com/facebook/create-react-app)
