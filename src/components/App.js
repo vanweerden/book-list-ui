@@ -1,10 +1,10 @@
 import React from 'react';
 import { Header } from './Header';
-import { BookFetch } from './BookFetch';
+import { FetchData } from './FetchData';
 
 export const App = () => (
   <div id="app">
     <Header />
-    <BookFetch />
+    <FetchData />
   </div>
 );

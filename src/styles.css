@@ -143,7 +143,7 @@ select {
 
 /* || Media queries */
 @media screen and (min-width: 600px) {
-  /* Mobile Table Layout */
+  /* Large screen Table Layout */
   .table-row {
     display: flex;
     flex-direction: row;

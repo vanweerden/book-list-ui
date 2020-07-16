@@ -4,7 +4,7 @@
 import React from 'react';
 import { BookSorter } from './BookSorter';
 
-export const EditBooks = (props) => {
+export const EditBookList = (props) => {
   let books = props.books;
 
   // Will be passed as prop to DeleteButton

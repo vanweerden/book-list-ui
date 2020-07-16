@@ -3,9 +3,9 @@
 
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
-import { EditBooks } from './EditBooks';
+import { EditBookList } from './EditBookList';
 
-export class BookFetch extends React.Component {
+export class FetchData extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,8 +44,8 @@ export class BookFetch extends React.Component {
       return <div>Loading...</div>
     } else {
       return (
-        <EditBooks  books={this.state.books}
-                    bookListChange={this.bookListChange} />
+        <EditBookList books={this.state.books}
+                      bookListChange={this.bookListChange} />
       );
     }
   }
