@@ -30,7 +30,6 @@ export class AddBook extends React.Component {
 
   validateForm(errors) {
     let valid = true;
-    // Add to Anki
     Object.values(errors).forEach(
       // If there is an error string, sets value to false
       val => val.length > 0 && (valid = false)
