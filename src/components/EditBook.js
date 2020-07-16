@@ -1,4 +1,4 @@
-// POSTS new book to database
+// UPDATES book (form appears when EDIT button clicked)
 import React, { Component } from 'react';
 import { parseName } from '../utils/parseName';
 import { today } from '../utils/dateFunctions';

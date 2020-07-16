@@ -85,15 +85,21 @@ header {
   font-size: 0.8em;
 }
 
-.delete-button {
-  /* border: solid 1px black; */
+.delete-button, .edit-button {
   width: 1em;
   height: 1em;
-  padding: 1em;
+  padding: 0.5em;
+}
+
+.delete-button {
   color: red;
 }
 
-.delete-button:hover {
+.edit-button {
+  color: green;
+}
+
+.delete-button:hover, .edit-button:hover {
   cursor: pointer;
 }
 

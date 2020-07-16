@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { parseDate } from '../utils/dateFunctions';
 import { DeleteButton } from './DeleteButton';
+import { EditBook } from './EditBook';
+import { EditButton } from './EditButton';
 
 export const BookItem = (props) => {
   // useState returns current state value and function to update it
@@ -26,10 +28,15 @@ export const BookItem = (props) => {
       <div className='table-cell pages'>{pages}</div>
       <div className='table-cell language'>{language}</div>
       <div className='table-cell blurb'>{blurb}</div>
-      <DeleteButton id={id}
+      <div className='book-item-buttons'>
+        <DeleteButton id={id}
                     shouldRender={showDelete}
                     deleteMethod={props.deleteMethod}
                     />
+        <EditButton id={id}
+                    shouldRender={showDelete}
+        />
+      </div>
     </div>
   );
 }
