@@ -19,24 +19,33 @@ export const BookItem = (props) => {
   const id = props.book.id;
 
   return (
-    <div  className='table-row book-item'
-          onMouseEnter={() => setShowDelete(true)}
-          onMouseLeave={() => setShowDelete(false)}>
-      <div className='table-cell title'>{title}</div>
-      <div className='table-cell author'>{authorFirst} {authorLast}</div>
-      <div className='table-cell date'>{finished}</div>
-      <div className='table-cell pages'>{pages}</div>
-      <div className='table-cell language'>{language}</div>
-      <div className='table-cell blurb'>{blurb}</div>
-      <div className='book-item-buttons'>
-        <DeleteButton id={id}
-                    shouldRender={showDelete}
-                    deleteMethod={props.deleteMethod}
-                    />
-        <EditButton id={id}
-                    shouldRender={showDelete}
-        />
+    <div>
+      <div  className='table-row book-item'
+            onMouseEnter={() => setShowDelete(true)}
+            onMouseLeave={() => setShowDelete(false)}>
+        <div className='table-cell title'>{title}</div>
+        <div className='table-cell author'>{authorFirst} {authorLast}</div>
+        <div className='table-cell date'>{finished}</div>
+        <div className='table-cell pages'>{pages}</div>
+        <div className='table-cell language'>{language}</div>
+        <div className='table-cell blurb'>{blurb}</div>
+        <div className='book-item-buttons'>
+          <DeleteButton id={id}
+                      shouldRender={showDelete}
+                      deleteMethod={props.deleteMethod}
+                      />
+          <EditButton id={id}
+                      shouldRender={showDelete}
+          />
+        </div>
       </div>
+      <EditBook title={title}
+                author={authorFirst + ' ' + authorLast}
+                finished={props.book.finished}
+                pages={pages}
+                language={language}
+                id={id}
+      />
     </div>
   );
 }
