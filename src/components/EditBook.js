@@ -12,8 +12,12 @@ export class EditBook extends React.Component {
       finished: this.props.finished,
       pages: this.props.pages,
       language: this.props.language,
+      blurb: this.props.blurb,
+      type: this.props.type,
     };
     this.handleInput = this.handleInput.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateBook = this.updateBook.bind(this);
   }
 
   handleInput(event) {
@@ -21,25 +25,27 @@ export class EditBook extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  updateBook(id) {
     const updatedEntry = this.state;
 
+    // Add correct properties
     let fullname = updatedEntry.author;
     delete updatedEntry.author;
     updatedEntry.authorFirstName = parseName(fullname, 'first');
     updatedEntry.authorLastName = parseName(fullname, 'last');
     updatedEntry.pages = parseInt(updatedEntry.pages);
+    console.log(updatedEntry);
 
-    return fetch('http://localhost:5000/books', {
+    fetch('http://localhost:5000/books/' + id, {
           method: 'PUT',
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json; charset=UTF-8',
           },
           body: JSON.stringify(updatedEntry),
         })
-    .then(res => res.text())
-    .then(res => {
+    .then(res => res.json())
+    .then(json => {
+      console.log(json);
       // re-fetches book list (to trigger re-rendering)
       this.props.bookListChange();
     })
@@ -48,10 +54,15 @@ export class EditBook extends React.Component {
     });
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    this.updateBook(this.props.id);
+  }
+
   render() {
     return (
       <div className='table-row book-item'>
-        <form // onSubmit={this.props.updateMethod}
+        <form onSubmit={this.handleSubmit}
               id="edit-book-form"
               noValidate>
 
@@ -99,6 +110,9 @@ export class EditBook extends React.Component {
                 <option value="french">French</option>
                 <option value="latin">Latin</option>
               </select>
+            </div>
+            <div>
+              <button type="submit">Submit</button>
             </div>
           </div>
         </form>

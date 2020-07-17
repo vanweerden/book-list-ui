@@ -44,6 +44,7 @@ export const BookItem = (props) => {
                 finished={props.book.finished}
                 pages={pages}
                 language={language}
+                blurb={blurb}
                 id={id}
                 bookListChange={props.bookListChange}
                 />
