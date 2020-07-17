@@ -15,9 +15,26 @@ export const EditBookList = (props) => {
     })
     .then(res => res.text())
     .then(res => {
-      // Remove book from array before sending to BookSorter (can't get BookSorter to re-render)
-      // books = books.filter(book => book.id != id)
+      // re-fetches book list (to trigger re-rendering)
+      props.bookListChange();
+      console.log('Books array: ', books)
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  }
 
+  // Passed down to and called from EditBook component
+  const updateBook = (id, body) => {
+    return fetch('http://localhost:5000/books', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body),
+        })
+    .then(res => res.text())
+    .then(res => {
       // re-fetches book list (to trigger re-rendering)
       props.bookListChange();
       console.log('Books array: ', books)
@@ -30,6 +47,7 @@ export const EditBookList = (props) => {
   return (
     <BookSorter books={books}
                 bookListChange={props.bookListChange}
-                deleteMethod={deleteBook}/>
+                deleteMethod={deleteBook}
+                updateMethod={updateBook}/>
   );
 }

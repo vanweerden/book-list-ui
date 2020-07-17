@@ -17,6 +17,7 @@ export const TableDisplay = (props) => {
       <BookListDisplay
         books={props.books}
         deleteMethod={props.deleteMethod}
+        updateMethod={props.updateMethod}
       />
       <AddBook
         bookListChange={props.bookListChange}

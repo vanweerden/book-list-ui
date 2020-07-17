@@ -45,6 +45,7 @@ export const BookItem = (props) => {
                 pages={pages}
                 language={language}
                 id={id}
+                updateMethod={props.updateMethod}
       />
     </div>
   );
