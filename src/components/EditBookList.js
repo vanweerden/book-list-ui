@@ -48,6 +48,6 @@ export const EditBookList = (props) => {
     <BookSorter books={books}
                 bookListChange={props.bookListChange}
                 deleteMethod={deleteBook}
-                updateMethod={updateBook}/>
+                />
   );
 }

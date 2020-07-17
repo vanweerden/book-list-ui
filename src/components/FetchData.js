@@ -1,5 +1,6 @@
 // Stateful container for BookList component
 // Fetches book list from API and stores them in state
+// NB: fetchBooks() passed down to any components that make changes
 
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
@@ -12,7 +13,6 @@ export class FetchData extends React.Component {
       books: null,
     };
     this.fetchBooks = this.fetchBooks.bind(this);
-    this.bookListChange = this.bookListChange.bind(this);
   }
 
   fetchBooks() {
@@ -24,7 +24,7 @@ export class FetchData extends React.Component {
       })
       .then( data => {
         console.log("Data Fetched: ", data);
-        this.setState({ books: data });
+        this.setState({ books: data }, () => console.log(this.state.books));
       }
     )
     .catch(err => console.log("ERROR:", err.message));
@@ -34,18 +34,13 @@ export class FetchData extends React.Component {
     this.fetchBooks();
   }
 
-  // Triggered by POST in AddBook (passed as prop)
-  bookListChange() {
-    this.fetchBooks();
-  }
-
   render() {
     if (this.state.books == null) {
       return <div>Loading...</div>
     } else {
       return (
         <EditBookList books={this.state.books}
-                      bookListChange={this.bookListChange} />
+                      bookListChange={this.fetchBooks} />
       );
     }
   }

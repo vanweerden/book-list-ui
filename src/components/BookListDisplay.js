@@ -8,7 +8,7 @@ export const BookListDisplay = (props) => {
     <BookItem book={item}
               key={item.id}
               deleteMethod={props.deleteMethod}
-              updateMethod={props.updateMethod}
+              bookListChange={props.bookListChange}
               />);
   return <div>{listItems}</div>
 }

@@ -21,6 +21,33 @@ export class EditBook extends React.Component {
     this.setState({ [name]: value });
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    const updatedEntry = this.state;
+
+    let fullname = updatedEntry.author;
+    delete updatedEntry.author;
+    updatedEntry.authorFirstName = parseName(fullname, 'first');
+    updatedEntry.authorLastName = parseName(fullname, 'last');
+    updatedEntry.pages = parseInt(updatedEntry.pages);
+
+    return fetch('http://localhost:5000/books', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedEntry),
+        })
+    .then(res => res.text())
+    .then(res => {
+      // re-fetches book list (to trigger re-rendering)
+      this.props.bookListChange();
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  }
+
   render() {
     return (
       <div className='table-row book-item'>

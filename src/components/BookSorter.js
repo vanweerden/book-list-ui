@@ -58,7 +58,6 @@ export class BookSorter extends React.Component {
         books={sortedBooks}
         bookListChange={this.props.bookListChange}
         deleteMethod={this.props.deleteMethod}
-        updateMethod={this.props.updateMethod}
       />
     );
   }
