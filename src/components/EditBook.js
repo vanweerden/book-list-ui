@@ -24,9 +24,7 @@ export class EditBook extends React.Component {
   render() {
     return (
       <div className='table-row book-item'>
-        <form method="update"
-              // TODO
-              // onSubmit={}
+        <form // onSubmit={this.props.updateMethod}
               id="edit-book-form"
               noValidate>
 
@@ -45,6 +43,7 @@ export class EditBook extends React.Component {
                       name="author"
                       maxLength="40"
                       defaultValue={this.state.author}
+                      onChange={this.handleInput}
                       />
             </div>
 
@@ -52,6 +51,7 @@ export class EditBook extends React.Component {
               <input  type="date"
                       name="finished"
                       defaultValue={trimDate(this.state.finished)}
+                      onChange={this.handleInput}
                       required/>
             </div>
 
@@ -59,12 +59,14 @@ export class EditBook extends React.Component {
               <input  type="text"
                       name="pages"
                       defaultValue={this.state.pages}
+                      onChange={this.handleInput}
                       maxLength="4"/>
             </div>
 
             <div className="table-cell form-cell form-language">
               <select name="language"
-                      className="clickable">
+                      className="clickable"
+                      onChange={this.handleInput}>
                 <option value="english">English</option>
                 <option value="japanese">Japanese</option>
                 <option value="french">French</option>
