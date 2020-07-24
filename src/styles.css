@@ -46,10 +46,6 @@ header {
   margin: 0 auto;
 }
 
-.table-item {
-
-}
-
 /* || Book Item */
 .table-row {
   border-bottom: 1px solid #BBB;
@@ -58,6 +54,10 @@ header {
   align-items: flex-start;
   margin: 0.3em;
   padding: 0.3em 0.3em 0.9em 0.3em;
+}
+
+.edit-book {
+  display: none;
 }
 
 .table-header {

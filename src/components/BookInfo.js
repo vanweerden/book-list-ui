@@ -22,7 +22,8 @@ export const BookInfo = (props) => {
                       deleteMethod={props.deleteMethod}
                       />
         <EditButton id={props.id}
-                    shouldRender={hover}/>
+                    shouldRender={hover}
+                    activateEdit={props.toggleEdit}/>
       </div>
     </div>
   );

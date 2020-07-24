@@ -77,6 +77,7 @@ export class EditBook extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.sendPutRequest();
+    this.props.deactivateEdit();
   }
 
   render() {

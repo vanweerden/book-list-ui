@@ -5,7 +5,7 @@ export const EditButton = (props) => {
   return (
     <div  className='edit-button'
           onClick={() => {
-            // Edit appears; BookItem info disappears
+            props.activateEdit()
           }}
           onMouseEnter={() => setContent('EDIT')}
           onMouseLeave={() => setContent('✎')}>
