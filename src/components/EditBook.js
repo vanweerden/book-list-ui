@@ -44,7 +44,6 @@ export class EditBook extends React.Component {
       dataToSend.authorFirstName = parseName(dataToSend.author, 'first');
       dataToSend.authorLastName = parseName(dataToSend.author, 'last');
       delete dataToSend.author;
-
     }
 
     if (dataToSend.pages) {
@@ -52,9 +51,7 @@ export class EditBook extends React.Component {
     }
 
     dataToSend.id = parseInt(dataToSend.id);
-    dataToSend = JSON.stringify(dataToSend);
-    console.log("Data to send as PUT request: ", dataToSend);
-    return dataToSend;
+    return dataToSend = JSON.stringify(dataToSend);
   }
 
   sendPutRequest() {
@@ -62,14 +59,14 @@ export class EditBook extends React.Component {
     fetch('http://localhost:5000/books/' + this.state.id, {
           method: 'PUT',
           headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
+            'Content-Type': 'application/json',
           },
           body: dataToSend,
         })
-    .then(res => res.json())
-    .then(json => {
-      console.log(json);
-      // re-fetches book list (to trigger re-rendering)
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success', data);
+      // Callback from parent (BookFetch) to rerender from db after post
       this.props.bookListChange();
     })
     .catch((error) => {
