@@ -7,8 +7,9 @@ export class EditBook extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: this.props.id,
       title: this.props.title,
-      author: this.props.author,
+      author: this.props.authorFirst + ' ' + this.props.authorLast,
       finished: this.props.finished,
       pages: this.props.pages,
       language: this.props.language,
@@ -16,8 +17,10 @@ export class EditBook extends React.Component {
       type: this.props.type,
     };
     this.handleInput = this.handleInput.bind(this);
+    this.getChangesIn = this.getChangesIn.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.updateBook = this.updateBook.bind(this);
+    this.format = this.format.bind(this);
+    this.sendPutRequest = this.sendPutRequest.bind(this);
   }
 
   handleInput(event) {
@@ -25,23 +28,43 @@ export class EditBook extends React.Component {
     this.setState({ [name]: value });
   }
 
-  updateBook(id) {
-    const updatedEntry = this.state;
+  getChangesIn(submittedData) {
+    let changes = submittedData;
+    for (let field of Object.keys(submittedData)) {
+      if (changes[field] === this.props[field] && field !== 'id') {
+        delete changes[field];
+      }
+    }
+    return changes;
+  }
 
-    // Add correct properties
-    let fullname = updatedEntry.author;
-    delete updatedEntry.author;
-    updatedEntry.authorFirstName = parseName(fullname, 'first');
-    updatedEntry.authorLastName = parseName(fullname, 'last');
-    updatedEntry.pages = parseInt(updatedEntry.pages);
-    console.log(updatedEntry);
+  format(changedData) {
+    let dataToSend = changedData;
+    if (dataToSend.author) {
+      dataToSend.authorFirstName = parseName(dataToSend.author, 'first');
+      dataToSend.authorLastName = parseName(dataToSend.author, 'last');
+      delete dataToSend.author;
 
-    fetch('http://localhost:5000/books/' + id, {
+    }
+
+    if (dataToSend.pages) {
+      dataToSend.pages = parseInt(dataToSend.pages);
+    }
+
+    dataToSend.id = parseInt(dataToSend.id);
+    dataToSend = JSON.stringify(dataToSend);
+    console.log("Data to send as PUT request: ", dataToSend);
+    return dataToSend;
+  }
+
+  sendPutRequest() {
+    const dataToSend = this.format(this.getChangesIn(this.state));
+    fetch('http://localhost:5000/books/' + this.state.id, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json; charset=UTF-8',
           },
-          body: JSON.stringify(updatedEntry),
+          body: dataToSend,
         })
     .then(res => res.json())
     .then(json => {
@@ -56,7 +79,7 @@ export class EditBook extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.updateBook(this.props.id);
+    this.sendPutRequest();
   }
 
   render() {

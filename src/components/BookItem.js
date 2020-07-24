@@ -40,7 +40,8 @@ export const BookItem = (props) => {
         </div>
       </div>
       <EditBook title={title}
-                author={authorFirst + ' ' + authorLast}
+                authorFirst={authorFirst}
+                authorLast={authorLast}
                 finished={props.book.finished}
                 pages={pages}
                 language={language}
