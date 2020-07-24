@@ -1,13 +1,14 @@
 // Present individual books as table rows
 import React, { useState } from 'react';
 import { parseDate } from '../utils/dateFunctions';
-import { DeleteButton } from './DeleteButton';
+import { BookInfo } from './BookInfo';
 import { EditBook } from './EditBook';
+import { DeleteButton } from './DeleteButton';
 import { EditButton } from './EditButton';
 
 export const BookItem = (props) => {
   // useState returns current state value and function to update it
-  const [showDelete, setShowDelete] = useState(false);
+  const [hover, setHover] = useState(false);
 
   const title = props.book.title;
   const authorFirst = props.book.authorFirstName;
@@ -20,33 +21,25 @@ export const BookItem = (props) => {
 
   return (
     <div>
-      <div  className='table-row book-item'
-            onMouseEnter={() => setShowDelete(true)}
-            onMouseLeave={() => setShowDelete(false)}>
-        <div className='table-cell title'>{title}</div>
-        <div className='table-cell author'>{authorFirst} {authorLast}</div>
-        <div className='table-cell date'>{finished}</div>
-        <div className='table-cell pages'>{pages}</div>
-        <div className='table-cell language'>{language}</div>
-        <div className='table-cell blurb'>{blurb}</div>
-        <div className='book-item-buttons'>
-          <DeleteButton id={id}
-                      shouldRender={showDelete}
-                      deleteMethod={props.deleteMethod}
-                      />
-          <EditButton id={id}
-                      shouldRender={showDelete}
-          />
-        </div>
-      </div>
-      <EditBook title={title}
-                authorFirst={authorFirst}
-                authorLast={authorLast}
-                finished={props.book.finished}
-                pages={pages}
-                language={language}
-                blurb={blurb}
-                id={id}
+      <BookInfo
+        title={props.book.title}
+        author={props.book.authorFirstName + ' ' + props.book.authorLastName}
+        finished={parseDate(props.book.finished)}
+        pages={props.book.pages}
+        language={props.book.language.charAt(0).toUpperCase() + props.book.language.slice(1)}
+        blurb={props.book.blurb}
+        id={props.book.id}
+        deleteMethod={props.deleteMethod}
+      />
+
+      <EditBook title={props.book.title}
+                authorFirst={props.book.authorFirstName}
+                authorLast={props.book.authorLastName}
+                finished={parseDate(props.book.finished)}
+                pages={props.book.pages}
+                language={props.book.language.charAt(0).toUpperCase() + props.book.language.slice(1)}
+                blurb={props.book.blurb}
+                id={props.book.id}
                 bookListChange={props.bookListChange}
                 />
     </div>
