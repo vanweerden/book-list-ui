@@ -26,17 +26,6 @@ export class BookItem extends React.Component {
       return { editMode: !prevState.editMode }
     });
   }
-  // const [hover, setHover] = useState(false);
-  // const [editActivated, activateEdit] = useState(false);
-
-  // const title = props.book.title;
-  // const authorFirst = props.book.authorFirstName;
-  // const authorLast = props.book.authorLastName;
-  // const finished = parseDate(props.book.finished);
-  // const pages = props.book.pages;
-  // const language = props.book.language.charAt(0).toUpperCase() + props.book.language.slice(1);
-  // const blurb = props.book.blurb;
-  // const id = props.book.id;
 
   render() {
     if (this.state.editMode) {
