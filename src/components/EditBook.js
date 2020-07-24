@@ -9,7 +9,7 @@ export class EditBook extends React.Component {
     this.state = {
       id: this.props.id,
       title: this.props.title,
-      author: this.props.authorFirst + ' ' + this.props.authorLast,
+      author: this.props.authorFirstName + ' ' + this.props.authorLastName,
       finished: this.props.finished,
       pages: this.props.pages,
       language: this.props.language,
@@ -17,7 +17,7 @@ export class EditBook extends React.Component {
       type: this.props.type,
     };
     this.handleInput = this.handleInput.bind(this);
-    this.getChangesIn = this.getChangesIn.bind(this);
+    this.getChanges = this.getChanges.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.format = this.format.bind(this);
     this.sendPutRequest = this.sendPutRequest.bind(this);
@@ -28,9 +28,13 @@ export class EditBook extends React.Component {
     this.setState({ [name]: value });
   }
 
-  getChangesIn(submittedData) {
-    let changes = submittedData;
-    for (let field of Object.keys(submittedData)) {
+  getChanges() {
+    let changes = this.state;
+    changes.authorFirstName = parseName(changes.author, 'first');
+    changes.authorLastName = parseName(changes.author, 'last');
+    delete changes.author;
+
+    for (let field of Object.keys(changes)) {
       if (changes[field] === this.props[field] && field !== 'id') {
         delete changes[field];
       }
@@ -38,13 +42,18 @@ export class EditBook extends React.Component {
     return changes;
   }
 
-  format(changedData) {
-    let dataToSend = changedData;
-    if (dataToSend.author) {
-      dataToSend.authorFirstName = parseName(dataToSend.author, 'first');
-      dataToSend.authorLastName = parseName(dataToSend.author, 'last');
-      delete dataToSend.author;
+  checkForChangesIn(fields) {
+    let changesDetected = false;
+    for (let field of Object.keys(fields)) {
+      if (field !== 'id') {
+        changesDetected = true;
+      }
     }
+    return changesDetected;
+  }
+
+  format(editedData) {
+    let dataToSend = editedData;
 
     if (dataToSend.pages) {
       dataToSend.pages = parseInt(dataToSend.pages);
@@ -55,7 +64,14 @@ export class EditBook extends React.Component {
   }
 
   sendPutRequest() {
-    const dataToSend = this.format(this.getChangesIn(this.state));
+    let changedData = this.getChanges();
+    // If no fields have been changed, don't send HTTP request
+    if (!this.checkForChangesIn(changedData)) {
+      return;
+    }
+
+    const dataToSend = this.format(changedData);
+
     fetch('http://localhost:5000/books/' + this.state.id, {
           method: 'PUT',
           headers: {

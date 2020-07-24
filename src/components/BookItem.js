@@ -32,8 +32,8 @@ export class BookItem extends React.Component {
       return (
         <EditBook
           title={this.props.book.title}
-          authorFirst={this.props.book.authorFirstName}
-          authorLast={this.props.book.authorLastName}
+          authorFirstName={this.props.book.authorFirstName}
+          authorLastName={this.props.book.authorLastName}
           finished={parseDate(this.props.book.finished)}
           pages={this.props.book.pages}
           language={this.props.book.language.charAt(0).toUpperCase() + this.props.book.language.slice(1)}
