@@ -157,7 +157,7 @@ export class EditBook extends React.Component {
               {selectTag}
             </div>
 
-            <div className="table-cell form-cell">
+            <div className="table-cell form-cell submit-button">
               <button type="submit">Submit</button>
             </div>
           </div>

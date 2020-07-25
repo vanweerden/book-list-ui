@@ -6,6 +6,7 @@ import { EditButton } from './EditButton';
 export const BookInfo = (props) => {
   // useState returns current state value and function to update it
   const [hover, setHover] = useState(false);
+  const capitalisedType = props.type.replace(/\b\w/g, a => a.toUpperCase());
   return (
     <div className='table-row book-item'
               onMouseEnter={() => setHover(true)}
@@ -14,7 +15,7 @@ export const BookInfo = (props) => {
       <div className='table-cell author'>{props.author}</div>
       <div className='table-cell date'>{props.finished}</div>
       <div className='table-cell pages'>{props.pages}</div>
-      <div className='table-cell type'>{props.type}</div>
+      <div className='table-cell type'>{capitalisedType}</div>
       <div className='book-item-buttons'>
         <DeleteButton id={props.id}
                       shouldRender={hover}
