@@ -41,10 +41,10 @@ export const TableHeader = (props) => {
       <HeaderButton
         classes={'table-cell language-header header-button'}
         handleClick={props.handleClick}
-        columnName={'Language'}
-        active={props.active === 'language'}
+        columnName={'Type'}
+        active={props.active === 'type'}
         asc={props.ascend}
-        id={'language'}
+        id={'type'}
       />
       <div className={'table-cell header-button delete-spacer'}></div>
     </div>

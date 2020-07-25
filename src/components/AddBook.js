@@ -8,8 +8,6 @@ const defaultState = {
   author: '',
   finished: today(),
   pages: '',
-  language: 'english',
-  blurb: '',
   type: 'fiction',
   errors: {
     title: '',
@@ -69,12 +67,6 @@ export class AddBook extends React.Component {
           value === '' || pagesRegexp.test(value)
             ? ''
             : 'Please enter a number!';
-        break;
-      case 'blurb':
-        errors.blurb =
-          value.length > 240
-            ? 'Max 240 characters!'
-            : '';
         break;
     }
 
@@ -174,42 +166,21 @@ export class AddBook extends React.Component {
                     onChange={this.handleChange}/>
               <div className='error'>{errors.pages.length > 0 && errors.pages}</div>
           </div>
-
-          <div className="table-cell form-cell form-language">
-            <select name="language"
-                    onChange={this.handleChange}
-                    className="clickable">
-              <option value="english">English</option>
-              <option value="japanese">Japanese</option>
-              <option value="french">French</option>
-              <option value="latin">Latin</option>
+          <div className="table-cell form-cell">
+            <select name="type"
+                    id="form-type"
+                    className="clickable"
+                    onChange={this.handleChange}>
+              <option value="fiction">Fiction</option>
+              <option value="non-fiction">Non-Fiction</option>
             </select>
-            <div className='error'></div>
           </div>
         </div>
-
-        <div className="table-row form-bottom">
-          <select name="type" id="form-type"
-                  className="clickable form-cell"
-                  onChange={this.handleChange}>
-            <option value="fic">Fiction</option>
-            <option value="nf">Non-Fiction</option>
-          </select>
-          <textarea name="blurb"
-                    id="form-blurb"
-                    placeholder="Summary (240 characters)"
-                    onChange={this.handleChange}
-                    value={this.state.blurb}
-                    maxLength="140" />
-          {errors.blurb.length > 0 &&
-            <span className='error'>{errors.blurb}</span>}
-
-          <input  type="submit"
-                  value="Add Book"
-                  className="button submit-button"
-                  onSubmit={this.sendData}
-                  />
-        </div>
+        <input  type="submit"
+                value="Add Book"
+                className="button submit-button"
+                onSubmit={this.sendData}
+                />
       </form>
     )
   }

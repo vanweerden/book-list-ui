@@ -36,8 +36,7 @@ export class BookItem extends React.Component {
           authorLastName={this.props.book.authorLastName}
           finished={parseDate(this.props.book.finished)}
           pages={this.props.book.pages}
-          language={this.props.book.language.charAt(0).toUpperCase() + this.props.book.language.slice(1)}
-          blurb={this.props.book.blurb}
+          type={this.props.book.type}
           id={this.props.book.id}
           bookListChange={this.props.bookListChange}
           deactivateEdit={this.toggleEdit}
@@ -50,8 +49,7 @@ export class BookItem extends React.Component {
           author={this.props.book.authorFirstName + ' ' + this.props.book.authorLastName}
           finished={parseDate(this.props.book.finished)}
           pages={this.props.book.pages}
-          language={this.props.book.language.charAt(0).toUpperCase() + this.props.book.language.slice(1)}
-          blurb={this.props.book.blurb}
+          type={this.props.book.type}
           id={this.props.book.id}
           deleteMethod={this.props.deleteMethod}
           toggleEdit={this.toggleEdit}

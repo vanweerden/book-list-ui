@@ -12,8 +12,6 @@ export class EditBook extends React.Component {
       author: this.props.authorFirstName + ' ' + this.props.authorLastName,
       finished: this.props.finished,
       pages: this.props.pages,
-      language: this.props.language,
-      blurb: this.props.blurb,
       type: this.props.type,
     };
     this.handleInput = this.handleInput.bind(this);
@@ -97,6 +95,23 @@ export class EditBook extends React.Component {
   }
 
   render() {
+    let selectTag;
+    if (this.props.type === "non-fiction") {
+      selectTag = (<select name="type"
+                            className="clickable"
+                            onChange={this.handleInput}>
+                      <option value="fiction">Fiction</option>
+                      <option value="non-fiction" selected>Non-Fiction</option>
+                   </select>);
+    } else {
+      selectTag = (<select name="type"
+                            className="clickable"
+                            onChange={this.handleInput}>
+                      <option value="fiction" selected>Fiction</option>
+                      <option value="non-fiction">Non-Fiction</option>
+                    </select>);
+    }
+
     return (
       <div className='table-row book-item'>
         <form onSubmit={this.handleSubmit}
@@ -139,16 +154,10 @@ export class EditBook extends React.Component {
             </div>
 
             <div className="table-cell form-cell form-language">
-              <select name="language"
-                      className="clickable"
-                      onChange={this.handleInput}>
-                <option value="english">English</option>
-                <option value="japanese">Japanese</option>
-                <option value="french">French</option>
-                <option value="latin">Latin</option>
-              </select>
+              {selectTag}
             </div>
-            <div>
+
+            <div className="table-cell form-cell">
               <button type="submit">Submit</button>
             </div>
           </div>

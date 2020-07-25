@@ -14,8 +14,7 @@ export const BookInfo = (props) => {
       <div className='table-cell author'>{props.author}</div>
       <div className='table-cell date'>{props.finished}</div>
       <div className='table-cell pages'>{props.pages}</div>
-      <div className='table-cell language'>{props.language}</div>
-      <div className='table-cell blurb'>{props.blurb}</div>
+      <div className='table-cell type'>{props.type}</div>
       <div className='book-item-buttons'>
         <DeleteButton id={props.id}
                       shouldRender={hover}
