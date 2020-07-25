@@ -179,9 +179,8 @@ select {
     flex-grow: 1.5;
   }
 
-  .delete-spacer, .delete-button {
-    flex-grow: 0.5;
-    size:
+  .header-spacer, .book-item-buttons {
+    width: 80px;
   }
 
   .book-item {
