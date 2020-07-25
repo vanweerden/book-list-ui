@@ -7,4 +7,9 @@ This is a front end interface for my [book-list app](https://github.com/vanweerd
 * Vanilla CSS (i.e. no frameworks used)
 
 ### Status
-I have added create, read, and delete functionality. I still need to add a way to update entries. I also need to add a way to create an account and sign in if I ever want to deploy it.
+Updated: 25 July 2020
+Basic functionality complete! Book can now be created, updated, and deleted from
+the UI. 
+
+Next I am going to do some refactoring (I violated the DRY principle by using two different forms for editing and adding books) and give it a CSS makeover.
+
