@@ -1,4 +1,4 @@
-// UPDATES book (form appears when EDIT button clicked)
+// UPDATES book information (form appears when EDIT button clicked)
 import React, { Component } from 'react';
 import { AddBook } from './AddBook';
 import { BookForm } from './BookForm';
@@ -23,7 +23,7 @@ export class EditBook extends AddBook {
     };
     this.getChanges = this.getChanges.bind(this);
     this.format = this.format.bind(this);
-    this.handleSubmitAndDeactivateEdit = this.handleSubmitAndDeactivateEdit.bind(this);
+    this.submitEdits = this.submitEdits.bind(this);
   }
 
   getChanges() {
@@ -48,11 +48,9 @@ export class EditBook extends AddBook {
 
   format(editedData) {
     let dataToSend = editedData;
-
     if (dataToSend.pages) {
       dataToSend.pages = parseInt(dataToSend.pages);
     }
-
     dataToSend.id = parseInt(dataToSend.id);
     return dataToSend = JSON.stringify(dataToSend);
   }
@@ -60,10 +58,7 @@ export class EditBook extends AddBook {
   fetchRequest(entry) {
     let changedData = this.getChanges();
     // If no fields have been changed, don't send HTTP request
-    if (!this.checkForChangesIn(changedData)) {
-      return;
-    }
-
+    if (!this.checkForChangesIn(changedData)) return;
     const dataToSend = this.format(changedData);
 
     fetch('http://localhost:5000/books/' + this.state.id, {
@@ -72,11 +67,11 @@ export class EditBook extends AddBook {
             'Content-Type': 'application/json',
           },
           body: dataToSend,
-        })
+    })
     .then(response => response.json())
     .then(data => {
       console.log('Success', data);
-      // Callback from parent (BookFetch) to rerender from db after post
+      // Method from BookFetch to rerender all books
       this.props.bookListChange();
     })
     .catch((error) => {
@@ -84,18 +79,17 @@ export class EditBook extends AddBook {
     });
   }
 
-  handleSubmitAndDeactivateEdit(e) {
+  submitEdits(e) {
     this.handleSubmit(e);
     this.props.deactivateEdit();
   }
 
   render() {
     const {errors} = this.state;
-
     return (
       <BookForm
         httpMethod={"put"}
-        handleSubmit={this.handleSubmitAndDeactivateEdit}
+        handleSubmit={this.submitEdits}
         handleChange={this.handleChange}
         editMode={true}
         title={this.state.title}
