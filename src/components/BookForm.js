@@ -1,4 +1,5 @@
-/* Need to pass the following:
+// Display component for EditBook and AddBook
+/* Need to pass the following from EditBook and AddBook
 - http method
 - onSubmit
 - handleChange
@@ -6,8 +7,9 @@
 - whole state, including errors and book fields
 */
 import React from 'react';
+import { trimDate } from '../utils/dateFunctions';
 
-export const BookForm = (props) {
+export const BookForm = (props) => {
   return (
     <form
       method={props.httpMethod}
@@ -66,7 +68,7 @@ export const BookForm = (props) {
             onChange={props.handleChange}
           />
           <div className='error'>
-            {errors.pages.length > 0 && errors.pages}
+            {props.errors.pages.length > 0 && props.errors.pages}
           </div>
         </div>
 

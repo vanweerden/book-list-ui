@@ -1,5 +1,6 @@
 // POSTS new book to database
 import React, { Component } from 'react';
+import { BookForm } from './BookForm';
 import { parseName } from '../utils/parseName';
 import { today } from '../utils/dateFunctions';
 
@@ -122,81 +123,18 @@ export class AddBook extends React.Component {
     const {errors} = this.state;
 
     return (
-      <form
-        method="post"
-        onSubmit={this.handleSubmit}
-        className="book-form"
-        noValidate>
-
-        <div className='table-row form-row'>
-          <div className="table-cell form-cell form-title">
-            <input
-              type="text"
-              name="title"
-              placeholder="Title"
-              maxLength="50"
-              onChange={this.handleChange}
-              defaultValue={this.state.title}
-              required
-            />
-            <div className='error'>
-              {errors.title.length > 0 && errors.title}
-            </div>
-          </div>
-
-          <div className="table-cell form-cell form-author">
-            <input
-              type="text"
-              name="author"
-              placeholder="Author: First Last"
-              maxLength="40"
-              onChange={this.handleChange}
-            />
-            <div className='error'>
-              {errors.author.length > 0 && errors.author}
-            </div>
-          </div>
-
-          <div className="table-cell form-cell form-finished">
-            <input
-              type="date"
-              name="finished"
-              onChange={this.handleChange}
-              required
-            />
-            <div className='error'></div>
-          </div>
-
-          <div className="table-cell form-cell form-pages">
-            <input  type="text"
-                    name="pages"
-                    placeholder="Pages"
-                    maxLength="4"
-                    onChange={this.handleChange}/>
-              <div className='error'>
-                {errors.pages.length > 0 && errors.pages}
-              </div>
-          </div>
-          <div className="table-cell form-cell form-type">
-            <select
-              name="type"
-              id="form-type"
-              className="clickable"
-              onChange={this.handleChange}
-            >
-              <option value="fiction">Fiction</option>
-              <option value="non-fiction">Non-Fiction</option>
-            </select>
-          </div>
-          <div className="table-cell form-cell">
-            <input
-              type="submit"
-              value="Add Book"
-              className="button submit-button"
-            />
-          </div>
-        </div>
-      </form>
-    )
+      <BookForm
+        httpMethod={"post"}
+        handleSubmit={this.handleSubmit}
+        handleChange={this.handleChange}
+        editMode={false}
+        title={this.state.title}
+        author={this.props.author}
+        errors={this.state.errors}
+        finished={this.state.finished}
+        pages={this.state.pages}
+        type={this.state.type}
+      />
+      );
   }
 }
