@@ -1,8 +1,7 @@
 // Displays Book Entry information
 
 import React, { useState } from 'react';
-import { DeleteButton } from './DeleteButton';
-import { EditButton } from './EditButton';
+import { SideButton } from './SideButton';
 
 export const BookInfo = (props) => {
   const [hover, setHover] = useState(false);
@@ -19,15 +18,24 @@ export const BookInfo = (props) => {
       <div className='table-cell pages'>{props.pages}</div>
       <div className='table-cell type'>{capitalisedType}</div>
       <div className='book-item-buttons'>
-        <DeleteButton
+        <SideButton
+          class='delete-button'
           id={props.id}
           shouldRender={hover}
-          deleteMethod={props.deleteMethod}
+          clickMethod={() => {
+            window.confirm('Are you sure you want to delete this item?')
+              && props.deleteMethod(props.id)
+          }}
+          activeContent={'DELETE'}
+          inactiveContent={'X'}
         />
-        <EditButton
+        <SideButton
+          class='edit-button'
           id={props.id}
           shouldRender={hover}
-          activateEdit={props.toggleEdit}
+          clickMethod={props.toggleEdit}
+          activeContent={'EDIT'}
+          inactiveContent={'✎'}
         />
       </div>
     </div>
