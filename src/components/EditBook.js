@@ -21,17 +21,12 @@ export class EditBook extends AddBook {
       }
     };
     this.getChanges = this.getChanges.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.format = this.format.bind(this);
-    this.sendPutRequest = this.sendPutRequest.bind(this);
+    this.handleSubmitAndDeactivateEdit = this.handleSubmitAndDeactivateEdit.bind(this);
   }
 
   getChanges() {
     let changes = this.state;
-    changes.authorFirstName = parseName(changes.author, 'first');
-    changes.authorLastName = parseName(changes.author, 'last');
-    delete changes.author;
-
     for (let field of Object.keys(changes)) {
       if (changes[field] === this.props[field] && field !== 'id') {
         delete changes[field];
@@ -61,7 +56,7 @@ export class EditBook extends AddBook {
     return dataToSend = JSON.stringify(dataToSend);
   }
 
-  sendPutRequest() {
+  fetchRequest(entry) {
     let changedData = this.getChanges();
     // If no fields have been changed, don't send HTTP request
     if (!this.checkForChangesIn(changedData)) {
@@ -88,13 +83,14 @@ export class EditBook extends AddBook {
     });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    this.sendPutRequest();
+  handleSubmitAndDeactivateEdit(e) {
+    this.handleSubmit(e);
     this.props.deactivateEdit();
   }
 
   render() {
+    const {errors} = this.state;
+
     let selectTag;
     if (this.props.type === "non-fiction") {
       selectTag = (<select name="type"
@@ -116,47 +112,64 @@ export class EditBook extends AddBook {
       <div className='table-row book-item'>
         <form
           method="put"
-          onSubmit={this.handleSubmit}
+          onSubmit={this.handleSubmitAndDeactivateEdit}
           className="book-form"
           noValidate
         >
 
           <div className='table-row form-row'>
             <div className="table-cell form-cell form-title">
-              <input  type="text"
-                      name="title"
-                      maxLength="50"
-                      defaultValue={this.state.title}
-                      onChange={this.handleChange}
-                      required />
+              <input
+                type="text"
+                name="title"
+                maxLength="50"
+                defaultValue={this.state.title}
+                onChange={this.handleChange}
+                required
+              />
+              <div className='error'>
+                {errors.title.length > 0 && errors.title}
+              </div>
             </div>
 
             <div className="table-cell form-cell form-author">
-              <input  type="text"
-                      name="author"
-                      maxLength="40"
-                      defaultValue={this.state.author}
-                      onChange={this.handleChange}
-                      />
+              <input
+                type="text"
+                name="author"
+                maxLength="40"
+                defaultValue={this.state.author}
+                onChange={this.handleChange}
+              />
+              <div className='error'>
+                {errors.author.length > 0 && errors.author}
+              </div>
             </div>
 
             <div className="table-cell form-cell form-finished">
-              <input  type="date"
-                      name="finished"
-                      defaultValue={trimDate(this.state.finished)}
-                      onChange={this.handleChange}
-                      required/>
+              <input
+                type="date"
+                name="finished"
+                defaultValue={trimDate(this.state.finished)}
+                onChange={this.handleChange}
+                required
+              />
+              <div className='error'></div>
             </div>
 
             <div className="table-cell form-cell form-pages">
-              <input  type="text"
-                      name="pages"
-                      defaultValue={this.state.pages}
-                      onChange={this.handleChange}
-                      maxLength="4"/>
+              <input
+                type="text"
+                name="pages"
+                defaultValue={this.state.pages}
+                onChange={this.handleChange}
+                maxLength="4"
+              />
+              <div className='error'>{
+                errors.pages.length > 0 && errors.pages}
+              </div>
             </div>
 
-            <div className="table-cell form-cell form-language">
+            <div className="table-cell form-cell form-type">
               {selectTag}
             </div>
 

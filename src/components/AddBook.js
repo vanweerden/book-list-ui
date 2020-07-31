@@ -130,33 +130,42 @@ export class AddBook extends React.Component {
 
         <div className='table-row form-row'>
           <div className="table-cell form-cell form-title">
-            <input  type="text"
-                    name="title"
-                    placeholder="Title"
-                    maxLength="50"
-                    onChange={this.handleChange}
-                    value={this.state.title}
-                    required />
-              <div className='error'>{errors.title.length > 0 && errors.title}</div>
+            <input
+              type="text"
+              name="title"
+              placeholder="Title"
+              maxLength="50"
+              onChange={this.handleChange}
+              value={this.state.title}
+              required
+            />
+            <div className='error'>
+              {errors.title.length > 0 && errors.title}
+            </div>
           </div>
 
           <div className="table-cell form-cell form-author">
-            <input  type="text"
-                    name="author"
-                    placeholder="Author: First Last"
-                    maxLength="40"
-                    onChange={this.handleChange}
-                    value={this.state.author}
-                    />
-              <div className='error'>{errors.author.length > 0 && errors.author}</div>
+            <input
+              type="text"
+              name="author"
+              placeholder="Author: First Last"
+              maxLength="40"
+              onChange={this.handleChange}
+              value={this.state.author}
+            />
+            <div className='error'>
+              {errors.author.length > 0 && errors.author}
+            </div>
           </div>
 
           <div className="table-cell form-cell form-finished">
-            <input  type="date"
-                    name="finished"
-                    onChange={this.handleChange}
-                    value={this.state.finished}
-                    required/>
+            <input
+              type="date"
+              name="finished"
+              onChange={this.handleChange}
+              value={this.state.finished}
+              required
+            />
             <div className='error'></div>
           </div>
 
@@ -167,13 +176,17 @@ export class AddBook extends React.Component {
                     placeholder="Pages"
                     maxLength="4"
                     onChange={this.handleChange}/>
-              <div className='error'>{errors.pages.length > 0 && errors.pages}</div>
+              <div className='error'>
+                {errors.pages.length > 0 && errors.pages}
+              </div>
           </div>
-          <div className="table-cell form-cell">
-            <select name="type"
-                    id="form-type"
-                    className="clickable"
-                    onChange={this.handleChange}>
+          <div className="table-cell form-cell form-type">
+            <select
+              name="type"
+              id="form-type"
+              className="clickable"
+              onChange={this.handleChange}
+            >
               <option value="fiction">Fiction</option>
               <option value="non-fiction">Non-Fiction</option>
             </select>
