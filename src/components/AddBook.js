@@ -122,7 +122,7 @@ export class AddBook extends React.Component {
         handleChange={this.handleChange}
         editMode={false}
         title={this.state.title}
-        author={this.props.author}
+        author={this.state.author}
         errors={this.state.errors}
         finished={this.state.finished}
         pages={this.state.pages}
