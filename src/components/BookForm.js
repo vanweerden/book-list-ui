@@ -17,7 +17,7 @@ const defaultState = {
   }
 };
 
-export class AddBook extends React.Component {
+export class BookForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = defaultState;
@@ -175,12 +175,16 @@ export class AddBook extends React.Component {
               <option value="non-fiction">Non-Fiction</option>
             </select>
           </div>
+          <div className="table-cell form-cell">
+            <input
+              type="submit"
+              value="Add Book"
+              className="button submit-button"
+              onSubmit={this.sendData}
+            />
+          </div>
         </div>
-        <input  type="submit"
-                value="Add Book"
-                className="button submit-button"
-                onSubmit={this.sendData}
-                />
+
       </form>
     )
   }

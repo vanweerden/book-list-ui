@@ -4,7 +4,7 @@
 import React from 'react';
 import { TableHeader } from './TableHeader';
 import { BookListDisplay } from './BookListDisplay';
-import { AddBook } from './AddBook';
+import { BookForm } from './BookForm';
 
 export const TableDisplay = (props) => {
   return (
@@ -19,7 +19,7 @@ export const TableDisplay = (props) => {
         deleteMethod={props.deleteMethod}
         bookListChange={props.bookListChange}
       />
-      <AddBook
+      <BookForm
         bookListChange={props.bookListChange}
       />
     </div>
