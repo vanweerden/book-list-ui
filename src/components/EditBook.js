@@ -116,7 +116,6 @@ export class EditBook extends AddBook {
           className="book-form"
           noValidate
         >
-
           <div className='table-row form-row'>
             <div className="table-cell form-cell form-title">
               <input
@@ -170,7 +169,15 @@ export class EditBook extends AddBook {
             </div>
 
             <div className="table-cell form-cell form-type">
-              {selectTag}
+              <select
+                name="type"
+                className="clickable"
+                onChange={this.handleInput}
+                defaultValue={this.state.type}
+              >
+                <option value="fiction">Fiction</option>
+                <option value="non-fiction">Non-Fiction</option>
+              </select>
             </div>
 
             <div className="table-cell form-cell">

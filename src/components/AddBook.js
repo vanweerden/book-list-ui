@@ -136,7 +136,7 @@ export class AddBook extends React.Component {
               placeholder="Title"
               maxLength="50"
               onChange={this.handleChange}
-              value={this.state.title}
+              defaultValue={this.state.title}
               required
             />
             <div className='error'>
@@ -151,7 +151,6 @@ export class AddBook extends React.Component {
               placeholder="Author: First Last"
               maxLength="40"
               onChange={this.handleChange}
-              value={this.state.author}
             />
             <div className='error'>
               {errors.author.length > 0 && errors.author}
@@ -163,7 +162,6 @@ export class AddBook extends React.Component {
               type="date"
               name="finished"
               onChange={this.handleChange}
-              value={this.state.finished}
               required
             />
             <div className='error'></div>
@@ -172,7 +170,6 @@ export class AddBook extends React.Component {
           <div className="table-cell form-cell form-pages">
             <input  type="text"
                     name="pages"
-                    value={this.state.pages}
                     placeholder="Pages"
                     maxLength="4"
                     onChange={this.handleChange}/>
@@ -196,11 +193,9 @@ export class AddBook extends React.Component {
               type="submit"
               value="Add Book"
               className="button submit-button"
-              onSubmit={this.sendData}
             />
           </div>
         </div>
-
       </form>
     )
   }
