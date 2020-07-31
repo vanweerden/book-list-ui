@@ -13,17 +13,17 @@ const defaultState = {
     title: '',
     author: '',
     pages: '',
-    blurb: '',
   }
 };
 
-export class BookForm extends React.Component {
+export class AddBook extends React.Component {
   constructor(props) {
     super(props);
     this.state = defaultState;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.validateForm = this.validateForm.bind(this);
+    this.sendPostRequest = this.sendPostRequest.bind(this);
   }
 
   validateForm(errors) {
@@ -95,6 +95,10 @@ export class BookForm extends React.Component {
     entry.authorLastName = parseName(fullname, 'last');
     entry.pages = parseInt(entry.pages);
 
+    this.sendPostRequest(entry);
+  }
+
+  sendPostRequest(entry) {
     fetch('http://localhost:5000/books', {
       method: 'POST',
       headers: {

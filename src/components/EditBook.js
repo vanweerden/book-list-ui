@@ -13,6 +13,11 @@ export class EditBook extends React.Component {
       finished: this.props.finished,
       pages: this.props.pages,
       type: this.props.type,
+      errors: {
+        title: '',
+        author: '',
+        pages: '',
+      }
     };
     this.handleInput = this.handleInput.bind(this);
     this.getChanges = this.getChanges.bind(this);
