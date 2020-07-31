@@ -1,6 +1,7 @@
 // UPDATES book (form appears when EDIT button clicked)
 import React, { Component } from 'react';
 import { AddBook } from './AddBook';
+import { BookForm } from './BookForm';
 import { parseName } from '../utils/parseName';
 import { trimDate } from '../utils/dateFunctions';
 
@@ -91,106 +92,19 @@ export class EditBook extends AddBook {
   render() {
     const {errors} = this.state;
 
-    let selectTag;
-    if (this.props.type === "non-fiction") {
-      selectTag = (<select name="type"
-                            className="clickable"
-                            onChange={this.handleInput}>
-                      <option value="fiction">Fiction</option>
-                      <option value="non-fiction" selected>Non-Fiction</option>
-                   </select>);
-    } else {
-      selectTag = (<select name="type"
-                            className="clickable"
-                            onChange={this.handleInput}>
-                      <option value="fiction" selected>Fiction</option>
-                      <option value="non-fiction">Non-Fiction</option>
-                    </select>);
-    }
-
     return (
-      <div className='table-row book-item'>
-        <form
-          method="put"
-          onSubmit={this.handleSubmitAndDeactivateEdit}
-          className="book-form"
-          noValidate
-        >
-          <div className='table-row form-row'>
-            <div className="table-cell form-cell form-title">
-              <input
-                type="text"
-                name="title"
-                maxLength="50"
-                defaultValue={this.state.title}
-                onChange={this.handleChange}
-                required
-              />
-              <div className='error'>
-                {errors.title.length > 0 && errors.title}
-              </div>
-            </div>
-
-            <div className="table-cell form-cell form-author">
-              <input
-                type="text"
-                name="author"
-                maxLength="40"
-                defaultValue={this.state.author}
-                onChange={this.handleChange}
-              />
-              <div className='error'>
-                {errors.author.length > 0 && errors.author}
-              </div>
-            </div>
-
-            <div className="table-cell form-cell form-finished">
-              <input
-                type="date"
-                name="finished"
-                defaultValue={trimDate(this.state.finished)}
-                onChange={this.handleChange}
-                required
-              />
-              <div className='error'></div>
-            </div>
-
-            <div className="table-cell form-cell form-pages">
-              <input
-                type="text"
-                name="pages"
-                defaultValue={this.state.pages}
-                onChange={this.handleChange}
-                maxLength="4"
-              />
-              <div className='error'>{
-                errors.pages.length > 0 && errors.pages}
-              </div>
-            </div>
-
-            <div className="table-cell form-cell form-type">
-              <select
-                name="type"
-                className="clickable"
-                onChange={this.handleInput}
-                defaultValue={this.state.type}
-              >
-                <option value="fiction">Fiction</option>
-                <option value="non-fiction">Non-Fiction</option>
-              </select>
-            </div>
-
-            <div className="table-cell form-cell">
-              <button
-                type="submit"
-                className="button submit-button"
-              >
-                Submit
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    )
+      <BookForm
+        httpMethod={"put"}
+        handleSubmit={this.handleSubmitAndDeactivateEdit}
+        handleChange={this.handleChange}
+        editMode={true}
+        title={this.state.title}
+        author={this.state.author}
+        errors={errors}
+        finished={this.state.finished}
+        pages={this.state.pages}
+        type={this.state.type}
+      />
+    );
   }
 }
