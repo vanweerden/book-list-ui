@@ -1,6 +1,6 @@
 // Displays table header buttons: takes callbacks from BookSorter to update BookSorter state
 
-import React, { Component } from 'react';
+import React from 'react';
 import { HeaderButton } from './HeaderButton';
 
 export const TableHeader = (props) => {

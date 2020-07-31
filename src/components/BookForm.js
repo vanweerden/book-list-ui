@@ -1,11 +1,5 @@
 // Display component for EditBook and AddBook
-/* Need to pass the following from EditBook and AddBook
-- http method
-- onSubmit
-- handleChange
-- editMode woth Boolean. If true, use edit properties. Else, use add book
-- whole state, including errors and book fields
-*/
+
 import React from 'react';
 import { trimDate } from '../utils/dateFunctions';
 

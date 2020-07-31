@@ -1,4 +1,5 @@
 // POSTS new book to database
+
 import React from 'react';
 import { BookForm } from './BookForm';
 import { parseName } from '../utils/parseName';
@@ -64,6 +65,8 @@ export class AddBook extends React.Component {
             ? ''
             : 'Please enter a number!';
         break;
+      default:
+        console.log("Error getting error message.");
     }
 
     this.setState({errors, [name]: value}, () => {

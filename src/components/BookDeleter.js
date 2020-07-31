@@ -1,15 +1,13 @@
-// Intermediate component between FetchBooks and SortBooks
-// Applies functions for adding, deleting, and updating books before sending to BookSorter to be sorted
+// Intermediate component between FetchData and BookSorter
 
 import React from 'react';
 import { BookSorter } from './BookSorter';
 
-export const EditBookList = (props) => {
+export const BookDeleter = (props) => {
   let books = props.books;
 
-  // Will be passed as prop to DeleteButton
+  // Passed as prop to DeleteButton
   const deleteBook = (id) => {
-    var id = id;
     return fetch('http://localhost:5000/books/' + id, {
       method: 'DELETE',
     })
@@ -25,9 +23,10 @@ export const EditBookList = (props) => {
   }
 
   return (
-    <BookSorter books={books}
-                bookListChange={props.bookListChange}
-                deleteMethod={deleteBook}
-                />
+    <BookSorter
+      books={books}
+      bookListChange={props.bookListChange}
+      deleteMethod={deleteBook}
+    />
   );
 }

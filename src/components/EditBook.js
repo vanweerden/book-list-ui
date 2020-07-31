@@ -1,9 +1,8 @@
 // UPDATES book information (form appears when EDIT button clicked)
-import React, { Component } from 'react';
+
+import React from 'react';
 import { AddBook } from './AddBook';
 import { BookForm } from './BookForm';
-import { parseName } from '../utils/parseName';
-import { trimDate } from '../utils/dateFunctions';
 
 export class EditBook extends AddBook {
   constructor(props) {

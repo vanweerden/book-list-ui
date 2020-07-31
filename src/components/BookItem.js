@@ -1,5 +1,6 @@
 // Present individual books as table rows
-import React, { useState } from 'react';
+
+import React from 'react';
 import { parseDate } from '../utils/dateFunctions';
 import { BookInfo } from './BookInfo';
 import { EditBook } from './EditBook';

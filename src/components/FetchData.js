@@ -1,10 +1,8 @@
 // Stateful container for BookList component
-// Fetches book list from API and stores them in state
 // NB: fetchBooks() passed down to any components that make changes
 
-import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
-import { EditBookList } from './EditBookList';
+import React from 'react';
+import { BookDeleter } from './BookDeleter';
 
 export class FetchData extends React.Component {
   constructor(props) {
@@ -39,8 +37,10 @@ export class FetchData extends React.Component {
       return <div>Loading...</div>
     } else {
       return (
-        <EditBookList books={this.state.books}
-                      bookListChange={this.fetchBooks} />
+        <BookDeleter
+          books={this.state.books}
+          bookListChange={this.fetchBooks}
+        />
       );
     }
   }

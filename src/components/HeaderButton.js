@@ -10,9 +10,10 @@ export const HeaderButton = (props) => {
   }
 
   return (
-    <div className={props.classes}
-         onClick={props.handleClick}
-         id={props.id}
+    <div
+      className={props.classes}
+      onClick={props.handleClick}
+      id={props.id}
     >
       {props.columnName} {arrow}
     </div>

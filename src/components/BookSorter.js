@@ -1,5 +1,6 @@
 // Receives array of books from BookFetch and sorts them based on field chosen and asc/desc
-import React, { Component } from 'react';
+
+import React from 'react';
 import { TableDisplay } from './TableDisplay';
 
 export class BookSorter extends React.Component {
@@ -13,11 +14,8 @@ export class BookSorter extends React.Component {
     this.sortBooks = this.sortBooks.bind(this);
   }
 
-  // Change state to values based on click, THEN calls sorting function
   handleClick(e) {
     const field = e.target.getAttribute("id");
-
-    // Change state: sortBy OR toggle ascending/descending
     if (field === this.state.sortBy) {
       this.setState((state, props) => ({
         ascend: !state.ascend
@@ -30,26 +28,23 @@ export class BookSorter extends React.Component {
     }
   }
 
-  sortBooks(unsorted) {
+  sortBooks() {
     const field = this.state.sortBy;
-    const asc = this.state.ascend;
-
+    const ascending = this.state.ascend;
     const sortedBooks = this.props.books.sort( function(a, b) {
       a = a[field];
       b = b[field];
-      if (asc) {
+      if (ascending) {
         return a < b ? -1 : a > b ? 1 : 0;
       } else {
         return a > b ? -1 : a < b ? 1 : 0;
       }
     });
-
     return sortedBooks;
   }
 
   render() {
     const sortedBooks = this.sortBooks(this.props.books);
-
     return (
       <TableDisplay
         handleClick={this.handleClick}
