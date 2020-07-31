@@ -1,10 +1,10 @@
+// Backup for EditBook changes: delete if it works
 // UPDATES book (form appears when EDIT button clicked)
 import React, { Component } from 'react';
-import { AddBook } from './AddBook';
 import { parseName } from '../utils/parseName';
 import { trimDate } from '../utils/dateFunctions';
 
-export class EditBook extends AddBook {
+export class EditBook extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,10 +20,16 @@ export class EditBook extends AddBook {
         pages: '',
       }
     };
+    this.handleInput = this.handleInput.bind(this);
     this.getChanges = this.getChanges.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.format = this.format.bind(this);
     this.sendPutRequest = this.sendPutRequest.bind(this);
+  }
+
+  handleInput(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   }
 
   getChanges() {
@@ -114,12 +120,9 @@ export class EditBook extends AddBook {
 
     return (
       <div className='table-row book-item'>
-        <form
-          method="put"
-          onSubmit={this.handleSubmit}
-          className="book-form"
-          noValidate
-        >
+        <form onSubmit={this.handleSubmit}
+              id="edit-book-form"
+              noValidate>
 
           <div className='table-row form-row'>
             <div className="table-cell form-cell form-title">
@@ -127,7 +130,7 @@ export class EditBook extends AddBook {
                       name="title"
                       maxLength="50"
                       defaultValue={this.state.title}
-                      onChange={this.handleChange}
+                      onChange={this.handleInput}
                       required />
             </div>
 
@@ -136,7 +139,7 @@ export class EditBook extends AddBook {
                       name="author"
                       maxLength="40"
                       defaultValue={this.state.author}
-                      onChange={this.handleChange}
+                      onChange={this.handleInput}
                       />
             </div>
 
@@ -144,7 +147,7 @@ export class EditBook extends AddBook {
               <input  type="date"
                       name="finished"
                       defaultValue={trimDate(this.state.finished)}
-                      onChange={this.handleChange}
+                      onChange={this.handleInput}
                       required/>
             </div>
 
@@ -152,7 +155,7 @@ export class EditBook extends AddBook {
               <input  type="text"
                       name="pages"
                       defaultValue={this.state.pages}
-                      onChange={this.handleChange}
+                      onChange={this.handleInput}
                       maxLength="4"/>
             </div>
 

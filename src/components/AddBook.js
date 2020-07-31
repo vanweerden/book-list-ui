@@ -23,7 +23,7 @@ export class AddBook extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.validateForm = this.validateForm.bind(this);
-    this.sendPostRequest = this.sendPostRequest.bind(this);
+    this.fetchRequest = this.fetchRequest.bind(this);
   }
 
   validateForm(errors) {
@@ -95,10 +95,10 @@ export class AddBook extends React.Component {
     entry.authorLastName = parseName(fullname, 'last');
     entry.pages = parseInt(entry.pages);
 
-    this.sendPostRequest(entry);
+    this.fetchRequest(entry);
   }
 
-  sendPostRequest(entry) {
+  fetchRequest(entry) {
     fetch('http://localhost:5000/books', {
       method: 'POST',
       headers: {
@@ -125,10 +125,9 @@ export class AddBook extends React.Component {
       <form
         method="post"
         onSubmit={this.handleSubmit}
-        id="new-book-form"
+        className="book-form"
         noValidate>
 
-        {/*First row of form*/}
         <div className='table-row form-row'>
           <div className="table-cell form-cell form-title">
             <input  type="text"
