@@ -15,8 +15,8 @@ export class BookItem extends React.Component {
     this.toggleHover = this.toggleHover.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
 
-    this.wrapperRef = React.createRef();
-    this.setWrapperRef = this.setWrapperRef.bind(this);
+    this.bookItem = React.createRef();
+    this.setBookItem = this.setBookItem.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
   }
 
@@ -41,14 +41,14 @@ export class BookItem extends React.Component {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
-  setWrapperRef(node) {
-    this.wrapperRef = node;
+  setBookItem(node) {
+    this.bookItem = node;
   }
 
   handleClickOutside(event) {
     if (this.state.editMode === true &&
-        this.wrapperRef &&
-       !this.wrapperRef.current.contains(event.target)) {
+        this.bookItem &&
+       !this.bookItem.current.contains(event.target)) {
       this.setState(prevState => {
         return { editMode: !prevState.editMode };
       });
@@ -58,7 +58,7 @@ export class BookItem extends React.Component {
   render() {
     if (this.state.editMode) {
       return (
-        <div ref={this.wrapperRef}>
+        <div ref={this.bookItem}>
           <EditBook
             title={this.props.book.title}
             authorFirstName={this.props.book.authorFirstName}
@@ -74,7 +74,7 @@ export class BookItem extends React.Component {
       );
     } else {
       return (
-        <div ref={this.wrapperRef}>
+        <div ref={this.bookItem}>
           <BookInfo
             title={this.props.book.title}
             author={this.props.book.authorFirstName + ' ' + this.props.book.authorLastName}
