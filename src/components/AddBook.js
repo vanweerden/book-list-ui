@@ -1,5 +1,5 @@
 // POSTS new book to database
-import React, { Component } from 'react';
+import React from 'react';
 import { BookForm } from './BookForm';
 import { parseName } from '../utils/parseName';
 import { today } from '../utils/dateFunctions';
@@ -29,20 +29,15 @@ export class AddBook extends React.Component {
 
   validateForm(errors) {
     let valid = true;
-    Object.values(errors).forEach(
-      // If there is an error string, sets value to false
-      val => val.length > 0 && (valid = false)
-    );
+    Object.values(errors).forEach( val => val.length > 0 && (valid = false) );
     return valid;
   }
 
-  // Validate input and save to state
   handleChange(event) {
     event.preventDefault();
     const { name, value } = event.target;
     let errors = this.state.errors;
 
-    // Author must be one or two words and only alpha characters
     const authorRegexp = /^[a-z]+( [a-z]+)?$/i;
     const pagesRegexp = /^\d+$/;
 
@@ -78,7 +73,6 @@ export class AddBook extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // Check for errors
     if (this.validateForm(this.state.errors)) {
       console.log('Valid form');
     } else {
@@ -86,10 +80,9 @@ export class AddBook extends React.Component {
       return;
     }
 
+    // Clean up data for http request
     let entry = this.state;
     delete entry.errors;
-
-    // Add correct properties
     let fullname = entry.author;
     delete entry.author;
     entry.authorFirstName = parseName(fullname, 'first');
@@ -110,7 +103,7 @@ export class AddBook extends React.Component {
     .then(response => response.json())
     .then(data => {
       console.log('Success', data);
-      // Callback from parent (BookFetch) to rerender from db after post
+      // Method from BookFetch to fetch all books after post
       this.props.bookListChange();
     })
     .catch((error) => {
@@ -135,6 +128,6 @@ export class AddBook extends React.Component {
         pages={this.state.pages}
         type={this.state.type}
       />
-      );
+    );
   }
 }
