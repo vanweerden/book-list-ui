@@ -23,7 +23,7 @@ export const BookInfo = (props) => {
           id={props.id}
           shouldRender={hover}
           clickMethod={() => {
-            window.confirm('Are you sure you want to delete this item?')
+            window.confirm(`Are you sure you want to delete ${props.title}?`)
               && props.deleteMethod(props.id)
           }}
           activeContent={'DELETE'}
