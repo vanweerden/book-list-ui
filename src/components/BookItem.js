@@ -62,7 +62,7 @@ export class BookItem extends React.Component {
           <EditBook
             title={this.props.book.title}
             authorFirstName={this.props.book.authorFirstName}
-            authorLastName={this.props.book.authorLastName}
+            authorLastName={this.props.book.authorLastName || ''}
             finished={parseDate(this.props.book.finished)}
             pages={this.props.book.pages}
             type={this.props.book.type}
@@ -77,7 +77,9 @@ export class BookItem extends React.Component {
         <div ref={this.bookItem}>
           <BookInfo
             title={this.props.book.title}
-            author={this.props.book.authorFirstName + ' ' + this.props.book.authorLastName}
+            author={this.props.book.authorFirstName + ' '
+              + (this.props.book.authorLastName ? ' '
+              + this.props.book.authorLastName : '')}
             finished={parseDate(this.props.book.finished)}
             pages={this.props.book.pages}
             type={this.props.book.type}
