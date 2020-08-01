@@ -1,7 +1,7 @@
 // Display component for EditBook and AddBook
 
 import React from 'react';
-import { trimDate } from '../utils/dateFunctions';
+import { trimDate, today } from '../utils/dateFunctions';
 
 export const BookForm = (props) => {
   return (
@@ -17,8 +17,8 @@ export const BookForm = (props) => {
             type="text"
             name="title"
             maxLength="50"
-            placeholder={props.editMode ? null : "Title"}
-            defaultValue={props.title}
+            placeholder={props.title ? null : "Title"}
+            value={props.title}
             onChange={props.handleChange}
             required
           />
@@ -32,8 +32,8 @@ export const BookForm = (props) => {
             type="text"
             name="author"
             maxLength="40"
-            placeholder={props.editMode ? null : "Author: First Last"}
-            defaultValue={props.author}
+            placeholder={props.author ? null : "Author: First Last"}
+            value={props.author}
             onChange={props.handleChange}
           />
           <div className='error'>
@@ -45,7 +45,7 @@ export const BookForm = (props) => {
           <input
             type="date"
             name="finished"
-            defaultValue={trimDate(props.finished)}
+            value={props.editMode ? trimDate(props.finished) : today()}
             onChange={props.handleChange}
             required
           />
@@ -57,8 +57,8 @@ export const BookForm = (props) => {
             type="text"
             name="pages"
             maxLength="4"
-            placeholder={props.editMode ? null : "Pages"}
-            defaultValue={props.pages}
+            placeholder={props.pages ? null : "Pages"}
+            value={props.pages}
             onChange={props.handleChange}
           />
           <div className='error'>
@@ -71,7 +71,7 @@ export const BookForm = (props) => {
             name="type"
             id="form-type"
             className="clickable"
-            defaultValue={props.type}
+            value={props.type}
             onChange={props.handleChange}
           >
             <option value="fiction">Fiction</option>

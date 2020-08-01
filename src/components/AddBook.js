@@ -5,27 +5,29 @@ import { BookForm } from './BookForm';
 import { parseName } from '../utils/parseName';
 import { today } from '../utils/dateFunctions';
 
-const defaultState = {
-  title: '',
-  author: '',
-  finished: today(),
-  pages: '',
-  type: 'fiction',
-  errors: {
-    title: '',
-    author: '',
-    pages: '',
-  }
-};
-
 export class AddBook extends React.Component {
   constructor(props) {
     super(props);
-    this.state = defaultState;
+    this.state = this.initialState;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.validateForm = this.validateForm.bind(this);
     this.fetchRequest = this.fetchRequest.bind(this);
+  }
+
+  get initialState() {
+    return {
+      title: '',
+      author: '',
+      finished: today(),
+      pages: '',
+      type: 'fiction',
+      errors: {
+        title: '',
+        author: '',
+        pages: '',
+      }
+    };
   }
 
   validateForm(errors) {
@@ -86,13 +88,18 @@ export class AddBook extends React.Component {
     // Clean up data for http request
     let entry = this.state;
     delete entry.errors;
-    let fullname = entry.author;
+    if (entry.author) {
+      let fullname = entry.author;
+      entry.authorFirstName = parseName(fullname, 'first');
+      entry.authorLastName = parseName(fullname, 'last');
+    } else {
+      entry.authorFirstName = 'Anonymous';
+      entry.authorLastName = '';
+    }
     delete entry.author;
-    entry.authorFirstName = parseName(fullname, 'first');
-    entry.authorLastName = parseName(fullname, 'last');
     entry.pages = parseInt(entry.pages);
-
     this.fetchRequest(entry);
+    this.setState(this.initialState, () => console.log("State after setState:", this.state));
   }
 
   fetchRequest(entry) {
@@ -112,11 +119,11 @@ export class AddBook extends React.Component {
     .catch((error) => {
       console.error('Error:', error);
     });
-    this.setState(defaultState);
   }
 
   render() {
     const {errors} = this.state;
+    const {title, author, finished, pages, type} = this.state;
 
     return (
       <BookForm
@@ -124,12 +131,12 @@ export class AddBook extends React.Component {
         handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
         editMode={false}
-        title={this.state.title}
-        author={this.state.author}
+        title={title}
+        author={author}
+        finished={finished}
+        pages={pages}
+        type={type}
         errors={errors}
-        finished={this.state.finished}
-        pages={this.state.pages}
-        type={this.state.type}
       />
     );
   }
