@@ -41,7 +41,7 @@ export class AddBook extends React.Component {
     const { name, value } = event.target;
     let errors = this.state.errors;
 
-    const authorRegexp = /^[a-z]+( [a-z]+)?$/i;
+    const authorRegexp = /^[a-z-]+( [a-z-]+)?$/i;
     const pagesRegexp = /^\d+$/;
 
     switch (name) {
