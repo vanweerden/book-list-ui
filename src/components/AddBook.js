@@ -50,6 +50,10 @@ export class AddBook extends React.Component {
           value.length > 50
             ? 'Must not be more than 50 characters in length!'
             : '';
+        errors.title =
+          value.length === 0
+            ? 'Please enter a title'
+            : '';
         break;
       case 'author':
         errors.author =
@@ -67,8 +71,7 @@ export class AddBook extends React.Component {
             ? ''
             : 'Please enter a number!';
         break;
-      default:
-        console.log("Error getting error message.");
+      // No default required
     }
 
     this.setState({errors, [name]: value}, () => {
@@ -82,6 +85,10 @@ export class AddBook extends React.Component {
       console.log('Valid form');
     } else {
       console.log('Invalid form');
+      return;
+    }
+
+    if (!this.state.title) {
       return;
     }
 
