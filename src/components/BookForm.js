@@ -45,7 +45,7 @@ export const BookForm = (props) => {
           <input
             type="date"
             name="finished"
-            value={props.editMode ? trimDate(props.finished) : today()}
+            value={trimDate(props.finished)}
             onChange={props.handleChange}
             required
           />
