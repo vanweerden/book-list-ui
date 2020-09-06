@@ -4,6 +4,7 @@ import React from 'react';
 import { BookForm } from './BookForm';
 import { parseName } from '../utils/parseName';
 import { today } from '../utils/dateFunctions';
+import { cloneDeep } from "lodash";
 
 export class AddBook extends React.Component {
   constructor(props) {
@@ -93,7 +94,7 @@ export class AddBook extends React.Component {
     }
 
     // Clean up data for http request
-    let entry = this.state;
+    let entry = cloneDeep(this.state);
     delete entry.errors;
     if (entry.author) {
       let fullname = entry.author;
@@ -106,7 +107,7 @@ export class AddBook extends React.Component {
     delete entry.author;
     entry.pages = parseInt(entry.pages);
     this.fetchRequest(entry);
-    this.setState(this.initialState, () => console.log("State after setState:", this.state));
+    this.setState(this.initialState);
   }
 
   fetchRequest(entry) {
