@@ -7,14 +7,20 @@ export const BookForm = (props) => {
   let clearButton;
   if (props.editMode !== true) {
     clearButton =
-    <input
-      type="button"
-      value="Clear"
-      className="button clear-button"
-      onClick={props.clearFields}
-    />;
+      <input
+        type="button"
+        value="Clear"
+        className="button clear-button"
+        onClick={props.clearFields}
+      />;
   } else {
-    clearButton = null;
+    clearButton =
+      <input
+        type="button"
+        value="Cancel"
+        className="button cancel-button"
+        onClick={props.cancelEdit}
+      />;
   }
 
   return (

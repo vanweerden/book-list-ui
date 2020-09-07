@@ -90,6 +90,7 @@ export class EditBook extends AddBook {
         httpMethod={"put"}
         handleSubmit={this.submitEdits}
         handleChange={this.handleChange}
+        cancelEdit={this.props.deactivateEdit}
         editMode={true}
         title={this.state.title}
         author={this.state.author}
@@ -97,6 +98,7 @@ export class EditBook extends AddBook {
         finished={this.state.finished}
         pages={this.state.pages}
         type={this.state.type}
+        cancelEdit={this.props.deactivateEdit}
       />
     );
   }
