@@ -1,9 +1,22 @@
 // Display component for EditBook and AddBook
 
 import React from 'react';
-import { trimDate, today } from '../utils/dateFunctions';
+import { trimDate } from '../utils/dateFunctions';
 
 export const BookForm = (props) => {
+  let clearButton;
+  if (props.editMode !== true) {
+    clearButton =
+    <input
+      type="button"
+      value="Clear"
+      className="button clear-button"
+      onClick={props.clearFields}
+    />;
+  } else {
+    clearButton = null;
+  }
+
   return (
     <form
       method={props.httpMethod}
@@ -85,6 +98,7 @@ export const BookForm = (props) => {
             value={props.editMode ? "Submit" : "Add Book"}
             className="button submit-button"
           />
+          {clearButton}
         </div>
       </div>
     </form>

@@ -4,7 +4,7 @@ import React from 'react';
 import { BookForm } from './BookForm';
 import { parseName } from '../utils/parseName';
 import { today } from '../utils/dateFunctions';
-import { cloneDeep } from "lodash";
+import { cloneDeep } from 'lodash';
 
 export class AddBook extends React.Component {
   constructor(props) {
@@ -14,6 +14,7 @@ export class AddBook extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.validateForm = this.validateForm.bind(this);
     this.fetchRequest = this.fetchRequest.bind(this);
+    this.clearFields = this.clearFields.bind(this);
   }
 
   get initialState() {
@@ -29,6 +30,10 @@ export class AddBook extends React.Component {
         pages: '',
       }
     };
+  }
+
+  clearFields() {
+    this.setState(this.initialState);
   }
 
   validateForm(errors) {
@@ -138,6 +143,7 @@ export class AddBook extends React.Component {
         httpMethod={"post"}
         handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
+        clearFields={this.clearFields}
         editMode={false}
         title={title}
         author={author}
