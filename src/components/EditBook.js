@@ -3,6 +3,7 @@
 import React from 'react';
 import { AddBook } from './AddBook';
 import { BookForm } from './BookForm';
+import { parseName } from '../utils/parseName';
 
 export class EditBook extends AddBook {
   constructor(props) {
@@ -25,41 +26,17 @@ export class EditBook extends AddBook {
     this.submitEdits = this.submitEdits.bind(this);
   }
 
-  getChanges() {
-    let changes = this.state;
-    for (let field of Object.keys(changes)) {
-      if (changes[field] === this.props[field] && field !== 'id') {
-        delete changes[field];
-      }
-    }
-    return changes;
-  }
-
-  checkForChangesIn(fields) {
-    let changesDetected = false;
-    for (let field of Object.keys(fields)) {
-      if (field !== 'id') {
-        changesDetected = true;
-      }
-    }
-    return changesDetected;
-  }
-
-  format(editedData) {
-    let dataToSend = editedData;
-    if (dataToSend.pages) {
-      dataToSend.pages = parseInt(dataToSend.pages);
-    }
-    dataToSend.id = parseInt(dataToSend.id);
-    return dataToSend = JSON.stringify(dataToSend);
+  submitEdits(e) {
+    this.handleSubmit(e);
+    this.props.deactivateEdit();
   }
 
   fetchRequest(entry) {
     let changedData = this.getChanges();
     // If no fields have been changed, don't send HTTP request
     if (!this.checkForChangesIn(changedData)) return;
-    const dataToSend = this.format(changedData);
 
+    const dataToSend = this.format(changedData);
     fetch('http://localhost:5000/books/' + this.state.id, {
           method: 'PUT',
           headers: {
@@ -78,9 +55,43 @@ export class EditBook extends AddBook {
     });
   }
 
-  submitEdits(e) {
-    this.handleSubmit(e);
-    this.props.deactivateEdit();
+  getChanges() {
+    let changes = JSON.parse(JSON.stringify(this.state));
+    for (let field in changes) {
+      if (changes[field] === this.props[field] && field !== 'id') {
+        delete changes[field];
+      }
+    }
+    return changes;
+  }
+
+  checkForChangesIn(fields) {
+    let changesDetected = false;
+    for (let field in fields) {
+      if (field !== 'id') {
+        changesDetected = true;
+      }
+    }
+    return changesDetected;
+  }
+
+  format(editedData) {
+    let dataToSend = editedData;
+    delete dataToSend.errors;
+
+    if (dataToSend.pages) {
+      dataToSend.pages = parseInt(dataToSend.pages);
+    }
+
+    dataToSend.id = parseInt(dataToSend.id);
+
+    if (dataToSend.author) {
+      let fullname = dataToSend.author;
+      dataToSend.authorFirstName = parseName(fullname, 'first');
+      dataToSend.authorLastName = parseName(fullname, 'last');
+      delete dataToSend.author;
+    }
+    return dataToSend = JSON.stringify(dataToSend);
   }
 
   render() {
